@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Fogón Wanka | Cocina Huanca Tradicional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Si una foto no carga (link roto, sin internet, etc.), la reemplazamos
+  // por un fondo de color con un ícono en vez de mostrar el ícono de "imagen rota".
+  function handleImgError(img){
+    var div = document.createElement('div');
+    div.className = img.className;
+    div.style.cssText = img.style.cssText;
+    div.style.background = 'linear-gradient(135deg, #b5452b, #c99a3e)';
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
+    div.style.justifyContent = 'center';
+    div.style.color = '#fff';
+    div.style.fontSize = '2.4rem';
+    div.textContent = '🍽️';
+    if (img.parentNode) img.parentNode.replaceChild(div, img);
+  }
+</script>
+<style>
+  :root{
+    --terracota:#b5452b;
+    --terracota-dark:#8f3520;
+    --crema:#faf3e8;
+    --crema-dark:#f0e4cf;
+    --oscuro:#2b2018;
+    --dorado:#c99a3e;
+    --verde:#4a6b4f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Poppins',sans-serif;color:var(--oscuro);background:var(--crema);line-height:1.6;}
+  h1,h2,h3,.logo{font-family:'Playfair Display',serif;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .container{max-width:1150px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(43,32,24,0.92);backdrop-filter:blur(6px);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1150px;margin:0 auto;}
+  .logo{color:var(--crema);font-size:1.5rem;font-weight:700;letter-spacing:0.5px;}
+  .logo span{color:var(--dorado);}
+  .nav-links{display:flex;gap:32px;list-style:none;}
+  .nav-links a{color:var(--crema);font-size:0.95rem;font-weight:500;transition:color .2s;}
+  .nav-links a:hover{color:var(--dorado);}
+  .nav-cta{background:var(--terracota);color:#fff;padding:10px 22px;border-radius:30px;font-weight:600;font-size:0.9rem;transition:background .2s;}
+  .nav-cta:hover{background:var(--terracota-dark);}
+  .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+  .menu-toggle span{width:26px;height:2px;background:var(--crema);}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:flex;align-items:center;
+    background:linear-gradient(rgba(20,14,10,0.55),rgba(20,14,10,0.65)),
+      url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    position:relative;
+  }
+  .hero-content{max-width:650px;padding:140px 24px 80px;color:#fff;}
+  .hero-tag{display:inline-block;background:rgba(201,154,62,0.2);border:1px solid var(--dorado);color:var(--dorado);padding:6px 16px;border-radius:30px;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
+  .hero h1{font-size:3.2rem;line-height:1.15;margin-bottom:18px;}
+  .hero p{font-size:1.1rem;color:#f0e4cf;margin-bottom:32px;max-width:520px;}
+  .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn-primary{background:var(--terracota);color:#fff;padding:15px 32px;border-radius:30px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:transform .2s,background .2s;}
+  .btn-primary:hover{background:var(--terracota-dark);transform:translateY(-2px);}
+  .btn-secondary{border:1.5px solid #fff;color:#fff;padding:15px 32px;border-radius:30px;font-weight:600;transition:background .2s;}
+  .btn-secondary:hover{background:rgba(255,255,255,0.15);}
+
+  /* SECTION GENERAL */
+  section{padding:100px 0;}
+  .section-tag{color:var(--terracota);font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:0.8rem;}
+  .section-title{font-size:2.3rem;margin:12px 0 20px;}
+  .section-desc{color:#5a4d40;max-width:600px;margin-bottom:50px;}
+  .center{text-align:center;margin-left:auto;margin-right:auto;}
+
+  /* ABOUT */
+  .about{background:#fff;}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .about-images{position:relative;}
+  .about-images img{border-radius:16px;}
+  .img-main{width:100%;height:420px;object-fit:cover;}
+  .img-float{position:absolute;bottom:-30px;right:-30px;width:180px;height:180px;object-fit:cover;border:6px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,0.15);}
+  .about-stats{display:flex;gap:40px;margin-top:30px;}
+  .stat b{font-size:1.8rem;color:var(--terracota);display:block;font-family:'Playfair Display',serif;}
+  .stat span{font-size:0.85rem;color:#5a4d40;}
+
+  /* MENU */
+  .menu{background:var(--oscuro);color:var(--crema);}
+  .menu .section-desc{color:#cbbfae;}
+  .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+  .menu-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:14px;overflow:hidden;transition:transform .25s,border-color .25s;}
+  .menu-card:hover{transform:translateY(-6px);border-color:var(--dorado);}
+  .menu-card img{height:200px;width:100%;object-fit:cover;}
+  .menu-card-body{padding:22px;}
+  .menu-card-body h3{font-size:1.15rem;margin-bottom:8px;}
+  .menu-card-body p{font-size:0.9rem;color:#cbbfae;margin-bottom:14px;}
+  .price{color:var(--dorado);font-weight:700;font-size:1.1rem;}
+
+  /* TESTIMONIALS */
+  .testimonials{background:var(--crema-dark);}
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .test-card{background:#fff;padding:30px;border-radius:14px;box-shadow:0 4px 20px rgba(0,0,0,0.05);}
+  .stars{color:var(--dorado);margin-bottom:14px;letter-spacing:2px;}
+  .test-card p{font-size:0.95rem;color:#4a3d30;margin-bottom:18px;font-style:italic;}
+  .test-author{display:flex;align-items:center;gap:12px;}
+  .avatar{width:42px;height:42px;border-radius:50%;background:var(--terracota);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;}
+  .test-author b{display:block;font-size:0.9rem;}
+  .test-author span{font-size:0.8rem;color:#8a7d6d;}
+
+  /* VISIT / MAP */
+  .visit{background:#fff;}
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;}
+  .info-row{display:flex;gap:16px;margin-bottom:26px;align-items:flex-start;}
+  .info-icon{width:44px;height:44px;background:var(--crema-dark);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--terracota);font-size:1.2rem;}
+  .info-row h4{font-size:1rem;margin-bottom:4px;}
+  .info-row p{font-size:0.9rem;color:#5a4d40;}
+  .map-box{border-radius:16px;overflow:hidden;height:100%;min-height:320px;}
+  .map-box iframe{width:100%;height:100%;min-height:320px;border:0;}
+
+  /* CTA */
+  .cta{background:var(--terracota);color:#fff;text-align:center;}
+  .cta h2{font-size:2.2rem;margin-bottom:16px;}
+  .cta p{max-width:500px;margin:0 auto 32px;color:#fbe3d8;}
+
+  /* FOOTER */
+  footer{background:var(--oscuro);color:#cbbfae;padding:50px 0 24px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+  footer .logo{margin-bottom:14px;}
+  footer p{font-size:0.9rem;line-height:1.7;}
+  footer h4{color:#fff;margin-bottom:16px;font-size:0.95rem;}
+  footer ul{list-style:none;}
+  footer ul li{margin-bottom:10px;font-size:0.9rem;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;text-align:center;font-size:0.8rem;color:#8a7d6d;}
+  .footer-bottom strong{color:var(--dorado);}
+
+  /* WHATSAPP FLOAT */
+  .wa-float{position:fixed;bottom:26px;right:26px;background:#25D366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:0 6px 18px rgba(0,0,0,0.25);z-index:99;transition:transform .2s;}
+  .wa-float:hover{transform:scale(1.08);}
+
+  @media (max-width:860px){
+    .nav-links,.nav-cta{display:none;}
+    .menu-toggle{display:flex;}
+    .hero h1{font-size:2.2rem;}
+    .about-grid,.visit-grid{grid-template-columns:1fr;}
+    .menu-grid,.test-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:24px;}
+    .img-float{width:120px;height:120px;bottom:-20px;right:10px;}
+    section{padding:70px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#" class="logo">El Fogón <span>Wanka</span></a>
+    <ul class="nav-links">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#opiniones">Opiniones</a></li>
+      <li><a href="#visitanos">Visítanos</a></li>
+    </ul>
+    <a href="https://wa.me/51900000000?text=Hola!%20Quiero%20reservar%20una%20mesa" class="nav-cta">Reservar mesa</a>
+    <button class="menu-toggle" aria-label="Menú"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">Cocina Huanca &amp; Andina</span>
+    <h1>Sabores del Valle del Mantaro, hechos con fuego y tradición</h1>
+    <p>Ingredientes de la sierra central, recetas de siempre y un ambiente que huele a casa. Ven a probar Huancayo en cada plato.</p>
+    <div class="hero-buttons">
+      <a href="https://wa.me/51900000000?text=Hola!%20Quiero%20reservar%20una%20mesa" class="btn-primary">📅 Reservar por WhatsApp</a>
+      <a href="#menu" class="btn-secondary">Ver el menú</a>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="nosotros">
+  <div class="container about-grid">
+    <div class="about-images">
+      <img class="img-main" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=900&auto=format&fit=crop" alt="Ambiente del restaurante" onerror="handleImgError(this)">
+      <img class="img-float" src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop" alt="Plato tradicional" onerror="handleImgError(this)">
+    </div>
+    <div>
+      <span class="section-tag">Nuestra historia</span>
+      <h2 class="section-title">20 años sirviendo la auténtica cocina huanca</h2>
+      <p class="section-desc">Nacimos en el corazón de Huancayo con una idea simple: que cada plato sepa a receta de abuela. Papa a la huancaína, pachamanca, trucha frita y cuy chactado, preparados igual que siempre.</p>
+      <div class="about-stats">
+        <div class="stat"><b>20+</b><span>Años de trayectoria</span></div>
+        <div class="stat"><b>4.9★</b><span>Calificación promedio</span></div>
+        <div class="stat"><b>15k+</b><span>Clientes atendidos</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="center" style="max-width:600px;">
+      <span class="section-tag">Nuestros platos</span>
+      <h2 class="section-title">Lo más pedido de la carta</h2>
+      <p class="section-desc center">Preparado al momento, con ingredientes frescos de mercado.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1518013431117-eb44ce1cd8e0?q=80&w=600&auto=format&fit=crop" alt="Papa a la huancaína" onerror="handleImgError(this)">
+        <div class="menu-card-body">
+          <h3>Papa a la Huancaína</h3>
+          <p>Papa amarilla bañada en crema de ají amarillo y queso fresco.</p>
+          <span class="price">S/ 18</span>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop" alt="Pachamanca" onerror="handleImgError(this)">
+        <div class="menu-card-body">
+          <h3>Pachamanca Mixta</h3>
+          <p>Cocción bajo tierra con piedras calientes: pollo, cerdo, cuy y habas.</p>
+          <span class="price">S/ 45</span>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1432139509613-5c4255815697?q=80&w=600&auto=format&fit=crop" alt="Trucha frita" onerror="handleImgError(this)">
+        <div class="menu-card-body">
+          <h3>Trucha Frita</h3>
+          <p>Trucha fresca del Mantaro, acompañada de arroz y ensalada.</p>
+          <span class="price">S/ 32</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="opiniones">
+  <div class="container">
+    <div class="center" style="max-width:600px;">
+      <span class="section-tag">Testimonios</span>
+      <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>"La pachamanca más rica que he probado en Huancayo. Ambiente familiar y atención excelente."</p>
+        <div class="test-author">
+          <div class="avatar">R</div>
+          <div><b>Rosa M.</b><span>Cliente frecuente</span></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>"Llevé a mi familia un domingo y todos quedaron encantados. Volveremos seguro."</p>
+        <div class="test-author">
+          <div class="avatar">J</div>
+          <div><b>Jorge P.</b><span>Google Reviews</span></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>"Sabor casero de verdad. Se nota que usan ingredientes frescos de la zona."</p>
+        <div class="test-author">
+          <div class="avatar">L</div>
+          <div><b>Lucía T.</b><span>Cliente frecuente</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visitanos">
+  <div class="container visit-grid">
+    <div>
+      <span class="section-tag">Visítanos</span>
+      <h2 class="section-title">Te esperamos con la mesa lista</h2>
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div><h4>Dirección</h4><p>Jr. Real 350, Huancayo, Junín</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🕒</div>
+        <div><h4>Horario</h4><p>Lun a Dom: 11:00 am – 9:00 pm</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📞</div>
+        <div><h4>Reservas</h4><p>+51 900 000 000 (WhatsApp)</p></div>
+      </div>
+    </div>
+    <div class="map-box">
+      <iframe src="https://www.google.com/maps?q=Huancayo,Peru&output=embed" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>¿Listo para probar Huancayo en un plato?</h2>
+    <p>Reserva tu mesa ahora mismo y vive la experiencia de la cocina huanca tradicional.</p>
+    <a href="https://wa.me/51900000000?text=Hola!%20Quiero%20reservar%20una%20mesa" class="btn-primary" style="background:#fff;color:var(--terracota);">Reservar por WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <a href="#" class="logo" style="color:#fff;">El Fogón <span>Wanka</span></a>
+      <p>Cocina tradicional huanca en el corazón de Huancayo. Recetas de siempre, ingredientes de la sierra central.</p>
+    </div>
+    <div>
+      <h4>Enlaces</h4>
+      <ul>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#menu">Menú</a></li>
+        <li><a href="#visitanos">Ubicación</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li>+51 900 000 000</li>
+        <li>hola@elfogonwanka.pe</li>
+        <li>Jr. Real 350, Huancayo</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 El Fogón Wanka — Sitio web de demostración creado por <strong>[Tu marca aquí]</strong>
+  </div>
+</footer>
+
+<a href="https://wa.me/51900000000?text=Hola!%20Quiero%20reservar%20una%20mesa" class="wa-float" aria-label="WhatsApp">💬</a>
+
+<script>
+  const toggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  const navCta = document.querySelector('.nav-cta');
+  toggle.addEventListener('click', () => {
+    const isOpen = navLinks.style.display === 'flex';
+    navLinks.style.display = isOpen ? 'none' : 'flex';
+    navLinks.style.flexDirection = 'column';
+    navLinks.style.position = 'absolute';
+    navLinks.style.top = '64px';
+    navLinks.style.left = '0';
+    navLinks.style.right = '0';
+    navLinks.style.background = '#2b2018';
+    navLinks.style.padding = '20px 24px';
+    navLinks.style.gap = '18px';
+    navCta.style.display = isOpen ? 'none' : 'inline-flex';
+  });
+</script>
+
+</body>
+</html>
