@@ -3,71 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portafolio de Proyectos Web — Huancayo</title>
+<title>Bryan Studio | Desarrollo Web Profesional — Huancayo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/script.js"></script>
 </head>
 <body>
 
+<div class="cursor-glow"></div>
+
 <header>
-  <div class="container">
-    <span class="eyebrow">Portafolio de proyectos</span>
-    <h1>Páginas web profesionales,<br>hechas a medida</h1>
-    <p>Cada proyecto tiene su propio estilo, pensado para el negocio que representa. Explora los ejemplos y toca "Ver demo" para verlos en vivo.</p>
-    <a href="https://wa.me/51900000000?text=Hola!%20Vi%20tu%20portafolio%20y%20quiero%20cotizar%20mi%20p%C3%A1gina" class="header-cta">💬 Cotiza tu proyecto</a>
-  </div>
+  <nav>
+    <a href="#" class="logo">BRYAN <span class="grad-text">STUDIO</span></a>
+    <a href="https://wa.me/51900000000?text=Hola!%20Vi%20tu%20portafolio%20y%20quiero%20cotizar%20mi%20p%C3%A1gina" class="nav-cta">Cotizar proyecto</a>
+  </nav>
 </header>
 
-<div class="grid-wrap">
-  <div class="container grid">
-
-    <div class="card reveal">
-      <div class="card-banner banner-restaurante"><span>🍽️</span></div>
-      <div class="card-body">
-        <span class="card-tag">Restaurante</span>
-        <h3>El Fogón Wanka</h3>
-        <p>Landing cálida y tradicional para un restaurante de cocina huanca, con menú, testimonios y reservas por WhatsApp.</p>
-        <a href="restaurante-wanka/" target="_blank" class="card-link">Ver demo →</a>
-      </div>
+<section class="hero">
+  <div class="blob blob-a"></div>
+  <div class="blob blob-b"></div>
+  <div class="grid-overlay"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">Desarrollo web a medida · Huancayo, Perú</span>
+    <h1>
+      <span class="word">Sitios</span> <span class="word">web</span> <span class="word">que</span>
+      <span class="word grad-text">convierten</span> <span class="word">visitas</span>
+      <span class="word">en</span> <span class="word">clientes.</span>
+    </h1>
+    <p>Diseño y construyo páginas profesionales, a medida para cada negocio — sin plantillas genéricas, con estilo propio y entrega rápida.</p>
+    <div class="hero-buttons">
+      <a href="https://wa.me/51900000000?text=Hola!%20Vi%20tu%20portafolio%20y%20quiero%20cotizar%20mi%20p%C3%A1gina" class="btn btn-primary">💬 Cotiza tu proyecto</a>
+      <a href="#proyectos" class="btn btn-ghost">Ver proyectos</a>
     </div>
+    <div class="scroll-hint"><span></span>scroll</div>
+  </div>
+</section>
 
-    <div class="card reveal">
-      <div class="card-banner banner-cerveceria"><span>🍺</span></div>
-      <div class="card-body">
-        <span class="card-tag">Cervecería artesanal</span>
-        <h3>SINCHI Brewing Co.</h3>
-        <p>Estilo industrial y oscuro, con catálogo de cervezas, especificaciones tipo ABV/IBU y reserva de taproom.</p>
-        <a href="cerveceria-sinchi/" target="_blank" class="card-link">Ver demo →</a>
-      </div>
+<div class="stats-bar">
+  <div class="container stats-grid">
+    <div>
+      <div class="stat-num grad-text" data-target="4" data-suffix="">0</div>
+      <div class="stat-label">Proyectos en portafolio</div>
     </div>
-
-    <div class="card reveal">
-      <div class="card-banner banner-crossfit"><span>🏋️</span></div>
-      <div class="card-body">
-        <span class="card-tag">Box de CrossFit</span>
-        <h3>GARAGE BOX</h3>
-        <p>Diseño energético con contadores animados, horarios de clases y planes de membresía.</p>
-        <a href="garage-box-crossfit/" target="_blank" class="card-link">Ver demo →</a>
-      </div>
+    <div>
+      <div class="stat-num grad-text" data-target="100" data-suffix="%">0</div>
+      <div class="stat-label">Diseño responsive</div>
     </div>
-
-    <div class="card reveal">
-      <div class="card-banner banner-content"><span>✦</span></div>
-      <div class="card-body">
-        <span class="card-tag">Creadora de contenido</span>
-        <h3>AURA Content Studio</h3>
-        <p>Estilo minimalista y moderno, con portafolio visual, proceso de trabajo y planes de servicio.</p>
-        <a href="aura-content-creator/" target="_blank" class="card-link">Ver demo →</a>
-      </div>
+    <div>
+      <div class="stat-num grad-text" data-target="5" data-suffix=" días">0</div>
+      <div class="stat-label">Entrega estimada</div>
     </div>
-
+    <div>
+      <div class="stat-num grad-text" data-target="5.0" data-suffix="★" data-decimals="1">0</div>
+      <div class="stat-label">Compromiso de calidad</div>
+    </div>
   </div>
 </div>
 
+<section id="proyectos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">Portafolio</span>
+      <h2 class="section-title">Cada proyecto, su propio estilo</h2>
+      <p class="section-desc">Nada de plantillas repetidas — cada negocio tiene una identidad distinta, y su web debe reflejarlo.</p>
+    </div>
+
+    <div class="project-grid">
+      <div class="tilt-card reveal">
+        <div class="card">
+          <div class="card-banner banner-restaurante"><span>🍽️</span></div>
+          <div class="card-body">
+            <span class="card-tag">Restaurante</span>
+            <h3>El Fogón Wanka</h3>
+            <p>Landing cálida y tradicional para cocina huanca, con menú, testimonios y reservas por WhatsApp.</p>
+            <a href="restaurante-wanka/" target="_blank" class="card-link">Ver demo en vivo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tilt-card reveal">
+        <div class="card">
+          <div class="card-banner banner-cerveceria"><span>🍺</span></div>
+          <div class="card-body">
+            <span class="card-tag">Cervecería artesanal</span>
+            <h3>SINCHI Brewing Co.</h3>
+            <p>Estilo industrial y oscuro, catálogo de cervezas con ABV/IBU y reserva de taproom.</p>
+            <a href="cerveceria-sinchi/" target="_blank" class="card-link">Ver demo en vivo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tilt-card reveal">
+        <div class="card">
+          <div class="card-banner banner-crossfit"><span>🏋️</span></div>
+          <div class="card-body">
+            <span class="card-tag">Box de CrossFit</span>
+            <h3>GARAGE BOX</h3>
+            <p>Diseño energético con contadores animados, horarios de clases y planes de membresía.</p>
+            <a href="garage-box-crossfit/" target="_blank" class="card-link">Ver demo en vivo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tilt-card reveal">
+        <div class="card">
+          <div class="card-banner banner-content"><span>✦</span></div>
+          <div class="card-body">
+            <span class="card-tag">Creadora de contenido</span>
+            <h3>AURA Content Studio</h3>
+            <p>Estilo minimalista, portafolio visual, proceso de trabajo y planes de servicio.</p>
+            <a href="aura-content-creator/" target="_blank" class="card-link">Ver demo en vivo →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">Por qué trabajar conmigo</span>
+      <h2 class="section-title">Diseño pensado para vender, no solo para verse bien</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">🎨</div>
+        <h3>Diseño 100% a medida</h3>
+        <p>Cada web se construye desde cero para tu marca — sin plantillas genéricas que se repiten en internet.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">⚡</div>
+        <h3>Entrega rápida</h3>
+        <p>Gracias al desarrollo asistido por IA, tu proyecto queda listo en días, no en semanas.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🛠️</div>
+        <h3>Soporte incluido</h3>
+        <p>Ajustes y cambios post-entrega incluidos en el lanzamiento, sin costos escondidos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>¿Listo para tener tu web profesional?</h2>
+      <p>Cuéntame sobre tu negocio y te muestro cómo se vería tu página, sin compromiso.</p>
+      <a href="https://wa.me/51900000000?text=Hola!%20Vi%20tu%20portafolio%20y%20quiero%20cotizar%20mi%20p%C3%A1gina" class="btn btn-primary pulse">💬 Escríbeme por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
 <footer>
-  Portafolio hecho por <strong>Bryan</strong> — Huancayo, Perú
+  <div class="container">
+    <strong>BRYAN STUDIO</strong> — Desarrollo web profesional en Huancayo, Perú
+  </div>
 </footer>
 
 </body>
