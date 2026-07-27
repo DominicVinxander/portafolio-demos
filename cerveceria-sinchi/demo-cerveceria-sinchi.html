@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SINCHI Brewing Co. | Cervecería Artesanal Andina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  // Respaldo: si una foto no carga, mostramos un fondo con ícono en vez del ícono de "imagen rota".
+  function handleImgError(img){
+    var div = document.createElement('div');
+    div.className = img.className;
+    div.style.cssText = img.style.cssText;
+    div.style.background = 'linear-gradient(135deg, #2a2118, #c17817)';
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
+    div.style.justifyContent = 'center';
+    div.style.color = '#f0e6d6';
+    div.style.fontSize = '2.4rem';
+    div.textContent = '🍺';
+    if (img.parentNode) img.parentNode.replaceChild(div, img);
+  }
+</script>
+<style>
+  :root{
+    --negro:#141210;
+    --carbon:#1e1b17;
+    --carbon-light:#2a2521;
+    --cobre:#c17817;
+    --cobre-dark:#9c5f10;
+    --crema:#f0e6d6;
+    --crema-dim:#c9bca5;
+    --verde-lupulo:#5c6b3f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;color:var(--crema);background:var(--negro);line-height:1.6;}
+  h1,h2,h3,.logo{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(20,18,16,0.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(193,120,23,0.2);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;max-width:1180px;margin:0 auto;}
+  .logo{font-size:1.7rem;color:var(--crema);}
+  .logo span{color:var(--cobre);}
+  .nav-links{display:flex;gap:36px;list-style:none;}
+  .nav-links a{color:var(--crema-dim);font-size:0.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color .2s;}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--cobre);transition:width .25s;}
+  .nav-links a:hover{color:var(--crema);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{background:var(--cobre);color:var(--negro);padding:11px 24px;font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;clip-path:polygon(8% 0,100% 0,92% 100%,0% 100%);transition:background .2s;}
+  .nav-cta:hover{background:var(--crema);}
+  .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+  .menu-toggle span{width:26px;height:2px;background:var(--crema);}
+
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(193,120,23,0.12),transparent 60%);pointer-events:none;}
+  .hero-content{padding:160px 24px 80px 60px;position:relative;z-index:2;}
+  .hero-tag{display:inline-flex;align-items:center;gap:8px;color:var(--cobre);font-size:0.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;}
+  .hero-tag::before{content:'';width:30px;height:2px;background:var(--cobre);}
+  .hero h1{font-size:4.8rem;line-height:0.95;margin-bottom:22px;}
+  .hero h1 em{font-style:normal;color:var(--cobre);}
+  .hero p{font-size:1.05rem;color:var(--crema-dim);margin-bottom:36px;max-width:460px;}
+  .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn-primary{background:var(--cobre);color:var(--negro);padding:16px 34px;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;clip-path:polygon(6% 0,100% 0,94% 100%,0% 100%);transition:background .2s,transform .2s;}
+  .btn-primary:hover{background:var(--crema);transform:translateY(-2px);}
+  .btn-secondary{border:1.5px solid var(--crema-dim);color:var(--crema);padding:16px 34px;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;transition:border-color .2s,color .2s;}
+  .btn-secondary:hover{border-color:var(--cobre);color:var(--cobre);}
+  .hero-visual{position:relative;height:100%;min-height:500px;}
+  .hero-visual img{width:100%;height:100%;object-fit:cover;clip-path:polygon(15% 0,100% 0,100% 100%,0% 100%);}
+  .hero-stats{position:absolute;bottom:60px;left:-40px;background:var(--carbon);border:1px solid rgba(193,120,23,0.3);padding:22px 28px;display:flex;gap:32px;z-index:3;}
+  .hero-stat b{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--cobre);}
+  .hero-stat span{font-size:0.72rem;color:var(--crema-dim);text-transform:uppercase;letter-spacing:1px;}
+
+  /* SECTION GENERAL */
+  section{padding:110px 0;}
+  .section-tag{color:var(--cobre);font-weight:700;letter-spacing:3px;text-transform:uppercase;font-size:0.78rem;}
+  .section-title{font-size:3rem;margin:10px 0 20px;}
+  .section-desc{color:var(--crema-dim);max-width:560px;margin-bottom:50px;}
+  .center{text-align:center;margin-left:auto;margin-right:auto;}
+
+  /* ABOUT */
+  .about{background:var(--carbon);}
+  .about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;align-items:center;}
+  .about-img{position:relative;}
+  .about-img img{clip-path:polygon(0 0,100% 8%,100% 100%,0 92%);height:460px;width:100%;object-fit:cover;}
+  .ingredients{display:flex;gap:0;margin-top:36px;border-top:1px solid rgba(193,120,23,0.25);}
+  .ingredient{flex:1;padding:20px 0;border-right:1px solid rgba(193,120,23,0.25);}
+  .ingredient:last-child{border-right:none;}
+  .ingredient b{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--cobre);}
+  .ingredient span{font-size:0.75rem;color:var(--crema-dim);text-transform:uppercase;letter-spacing:0.5px;}
+
+  /* BEERS */
+  .beers{background:var(--negro);}
+  .beer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(193,120,23,0.2);}
+  .beer-card{background:var(--carbon);padding:36px 30px;position:relative;transition:background .25s;}
+  .beer-card:hover{background:var(--carbon-light);}
+  .beer-img{height:180px;margin-bottom:24px;overflow:hidden;clip-path:polygon(0 0,100% 0,100% 88%,88% 100%,0 100%);}
+  .beer-img img{width:100%;height:100%;object-fit:cover;}
+  .beer-card h3{font-size:1.9rem;color:var(--crema);margin-bottom:6px;}
+  .beer-style{color:var(--cobre);font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+  .beer-card p{font-size:0.88rem;color:var(--crema-dim);margin-bottom:20px;}
+  .beer-specs{display:flex;gap:18px;margin-bottom:18px;}
+  .spec b{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--crema);}
+  .spec span{font-size:0.68rem;color:var(--crema-dim);text-transform:uppercase;}
+  .beer-price{color:var(--cobre);font-weight:700;font-size:1.15rem;font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
+
+  /* TESTIMONIALS */
+  .testimonials{background:var(--carbon);}
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(193,120,23,0.2);}
+  .test-card{background:var(--negro);padding:34px;}
+  .stars{color:var(--cobre);margin-bottom:16px;letter-spacing:3px;font-size:0.9rem;}
+  .test-card p{font-size:0.92rem;color:var(--crema-dim);margin-bottom:20px;font-style:italic;}
+  .test-author{display:flex;align-items:center;gap:12px;}
+  .avatar{width:40px;height:40px;background:var(--cobre);color:var(--negro);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:'Bebas Neue',sans-serif;clip-path:polygon(20% 0,100% 0,80% 100%,0% 100%);}
+  .test-author b{display:block;font-size:0.88rem;color:var(--crema);}
+  .test-author span{font-size:0.75rem;color:var(--crema-dim);}
+
+  /* VISIT */
+  .visit{background:var(--negro);}
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;}
+  .info-row{display:flex;gap:18px;margin-bottom:28px;align-items:flex-start;}
+  .info-icon{width:46px;height:46px;background:var(--carbon);border:1px solid rgba(193,120,23,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--cobre);font-size:1.2rem;clip-path:polygon(15% 0,100% 0,85% 100%,0% 100%);}
+  .info-row h4{font-size:0.95rem;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;color:var(--crema);}
+  .info-row p{font-size:0.9rem;color:var(--crema-dim);}
+  .map-box{overflow:hidden;height:100%;min-height:320px;clip-path:polygon(0 0,100% 5%,100% 100%,0 95%);}
+  .map-box iframe{width:100%;height:100%;min-height:320px;border:0;filter:grayscale(0.3) contrast(1.1);}
+
+  /* CTA */
+  .cta{background:linear-gradient(120deg,var(--cobre-dark),var(--cobre));color:var(--negro);text-align:center;}
+  .cta h2{font-size:2.6rem;margin-bottom:16px;}
+  .cta p{max-width:520px;margin:0 auto 32px;color:rgba(20,18,16,0.75);font-weight:500;}
+  .cta .btn-primary{background:var(--negro);color:var(--crema);}
+  .cta .btn-primary:hover{background:var(--carbon);}
+
+  /* FOOTER */
+  footer{background:var(--carbon);color:var(--crema-dim);padding:60px 0 26px;border-top:1px solid rgba(193,120,23,0.2);}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:44px;}
+  footer .logo{margin-bottom:16px;display:block;}
+  footer p{font-size:0.88rem;line-height:1.7;}
+  footer h4{color:var(--crema);margin-bottom:18px;font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;}
+  footer ul{list-style:none;}
+  footer ul li{margin-bottom:11px;font-size:0.88rem;}
+  .footer-bottom{border-top:1px solid rgba(193,120,23,0.15);padding-top:22px;text-align:center;font-size:0.78rem;color:#7a6f5f;}
+  .footer-bottom strong{color:var(--cobre);}
+
+  /* WHATSAPP FLOAT */
+  .wa-float{position:fixed;bottom:26px;right:26px;background:#25D366;color:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:0 6px 20px rgba(0,0,0,0.4);z-index:99;transition:transform .2s;}
+  .wa-float:hover{transform:scale(1.08);}
+
+  @media (max-width:960px){
+    .nav-links,.nav-cta{display:none;}
+    .menu-toggle{display:flex;}
+    .hero{grid-template-columns:1fr;}
+    .hero-visual{display:none;}
+    .hero-content{padding:130px 24px 60px;}
+    .hero h1{font-size:2.8rem;}
+    .about-grid,.visit-grid{grid-template-columns:1fr;}
+    .beer-grid,.test-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:26px;}
+    section{padding:70px 0;}
+    .hero-stats{position:static;margin-top:30px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#" class="logo">SINCHI <span>Brewing Co.</span></a>
+    <ul class="nav-links">
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#cervezas">Cervezas</a></li>
+      <li><a href="#opiniones">Opiniones</a></li>
+      <li><a href="#visitanos">Taproom</a></li>
+    </ul>
+    <a href="https://wa.me/51900000001?text=Hola!%20Quiero%20visitar%20el%20taproom" class="nav-cta">Reservar mesa</a>
+    <button class="menu-toggle" aria-label="Menú"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">Cervecería artesanal · Huancayo</span>
+    <h1>Fuerza andina<br>en cada <em>botella</em></h1>
+    <p>Cerveza artesanal elaborada en pequeños lotes, con maltas de cebada y granos andinos como la kiwicha. Sin prisa, sin atajos.</p>
+    <div class="hero-buttons">
+      <a href="https://wa.me/51900000001?text=Hola!%20Quiero%20visitar%20el%20taproom" class="btn-primary">🍺 Visitar el taproom</a>
+      <a href="#cervezas" class="btn-secondary">Ver cervezas</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1436076863939-06870fe779c2?q=80&w=1200&auto=format&fit=crop" alt="Cerveza artesanal SINCHI" onerror="handleImgError(this)">
+    <div class="hero-stats">
+      <div class="hero-stat"><b>2019</b><span>Desde</span></div>
+      <div class="hero-stat"><b>6</b><span>Estilos</span></div>
+      <div class="hero-stat"><b>100%</b><span>Artesanal</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="historia">
+  <div class="container about-grid">
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1584225064785-c62a8b43d148?q=80&w=800&auto=format&fit=crop" alt="Proceso de elaboración" onerror="handleImgError(this)">
+    </div>
+    <div>
+      <span class="section-tag">Nuestra historia</span>
+      <h2 class="section-title">Cerveza hecha con paciencia, no con prisa</h2>
+      <p class="section-desc">Empezamos en una cocina, probando recetas con ingredientes de la sierra central. Hoy seguimos elaborando en lotes pequeños, controlando cada paso a mano, porque la cerveza artesanal no se apura.</p>
+      <div class="ingredients">
+        <div class="ingredient"><b>4-6</b><span>Semanas de maduración</span></div>
+        <div class="ingredient"><b>100L</b><span>Por lote</span></div>
+        <div class="ingredient"><b>0</b><span>Conservantes</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="beers" id="cervezas">
+  <div class="container">
+    <div class="center" style="max-width:600px;">
+      <span class="section-tag">Nuestras cervezas</span>
+      <h2 class="section-title">La línea SINCHI</h2>
+      <p class="section-desc center">Seis estilos, cada uno con su propio carácter.</p>
+    </div>
+  </div>
+  <div class="beer-grid">
+    <div class="beer-card">
+      <div class="beer-img"><img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?q=80&w=500&auto=format&fit=crop" alt="Sinchi Golden Ale" onerror="handleImgError(this)"></div>
+      <h3>Golden Ale</h3>
+      <span class="beer-style">Rubia con kiwicha andina</span>
+      <p>Ligera y refrescante, con un toque de granos andinos tostados.</p>
+      <div class="beer-specs">
+        <div class="spec"><b>5.2%</b><span>ABV</span></div>
+        <div class="spec"><b>18</b><span>IBU</span></div>
+      </div>
+      <span class="beer-price">S/ 18</span>
+    </div>
+    <div class="beer-card">
+      <div class="beer-img"><img src="https://images.unsplash.com/photo-1518176258769-f227c798150e?q=80&w=500&auto=format&fit=crop" alt="Puma Negra Stout" onerror="handleImgError(this)"></div>
+      <h3>Puma Negra</h3>
+      <span class="beer-style">Stout con cacao andino</span>
+      <p>Cuerpo denso, notas de café y chocolate amargo de la selva central.</p>
+      <div class="beer-specs">
+        <div class="spec"><b>6.8%</b><span>ABV</span></div>
+        <div class="spec"><b>35</b><span>IBU</span></div>
+      </div>
+      <span class="beer-price">S/ 20</span>
+    </div>
+    <div class="beer-card">
+      <div class="beer-img"><img src="https://images.unsplash.com/photo-1568644396922-5c3bfae12211?q=80&w=500&auto=format&fit=crop" alt="Wayra IPA" onerror="handleImgError(this)"></div>
+      <h3>Wayra IPA</h3>
+      <span class="beer-style">IPA de lúpulos cítricos</span>
+      <p>Amarga y aromática, con notas cítricas que refrescan como el viento de altura.</p>
+      <div class="beer-specs">
+        <div class="spec"><b>6.2%</b><span>ABV</span></div>
+        <div class="spec"><b>55</b><span>IBU</span></div>
+      </div>
+      <span class="beer-price">S/ 20</span>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="opiniones">
+  <div class="container">
+    <div class="center" style="max-width:600px;">
+      <span class="section-tag">Lo que dicen</span>
+      <h2 class="section-title">Nuestra comunidad</h2>
+    </div>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>"La Puma Negra es lo mejor que he probado en cerveza artesanal peruana. Increíble balance."</p>
+      <div class="test-author">
+        <div class="avatar">D</div>
+        <div><b>Diego R.</b><span>Cliente frecuente</span></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>"El taproom tiene un ambiente único. Fuimos con amigos y no quisimos irnos."</p>
+      <div class="test-author">
+        <div class="avatar">C</div>
+        <div><b>Camila S.</b><span>Google Reviews</span></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>"Se nota que cada lote está hecho con cuidado. Mi favorita es la Wayra IPA."</p>
+      <div class="test-author">
+        <div class="avatar">A</div>
+        <div><b>Andrés M.</b><span>Cliente frecuente</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visitanos">
+  <div class="container visit-grid">
+    <div>
+      <span class="section-tag">Taproom</span>
+      <h2 class="section-title">Ven a probarlas en vivo</h2>
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div><h4>Dirección</h4><p>Jr. Cusco 480, Huancayo, Junín</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🕒</div>
+        <div><h4>Horario</h4><p>Jue a Dom: 5:00 pm – 11:00 pm</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📞</div>
+        <div><h4>Reservas</h4><p>+51 900 000 001 (WhatsApp)</p></div>
+      </div>
+    </div>
+    <div class="map-box">
+      <iframe src="https://www.google.com/maps?q=Huancayo,Peru&output=embed" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>¿Listo para probar la fuerza andina?</h2>
+    <p>Reserva tu mesa en el taproom o pregúntanos dónde encontrar nuestras cervezas cerca de ti.</p>
+    <a href="https://wa.me/51900000001?text=Hola!%20Quiero%20visitar%20el%20taproom" class="btn-primary">Reservar por WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <a href="#" class="logo" style="font-size:1.6rem;">SINCHI <span>Brewing Co.</span></a>
+      <p>Cervecería artesanal en Huancayo. Lotes pequeños, ingredientes andinos, cero prisa.</p>
+    </div>
+    <div>
+      <h4>Enlaces</h4>
+      <ul>
+        <li><a href="#historia">Historia</a></li>
+        <li><a href="#cervezas">Cervezas</a></li>
+        <li><a href="#visitanos">Taproom</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li>+51 900 000 001</li>
+        <li>hola@sinchibrewing.pe</li>
+        <li>Jr. Cusco 480, Huancayo</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 SINCHI Brewing Co. — Sitio web de demostración creado por <strong>[Tu marca aquí]</strong>
+  </div>
+</footer>
+
+<a href="https://wa.me/51900000001?text=Hola!%20Quiero%20visitar%20el%20taproom" class="wa-float" aria-label="WhatsApp">💬</a>
+
+<script>
+  const toggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  const navCta = document.querySelector('.nav-cta');
+  toggle.addEventListener('click', () => {
+    const isOpen = navLinks.style.display === 'flex';
+    navLinks.style.display = isOpen ? 'none' : 'flex';
+    navLinks.style.flexDirection = 'column';
+    navLinks.style.position = 'absolute';
+    navLinks.style.top = '68px';
+    navLinks.style.left = '0';
+    navLinks.style.right = '0';
+    navLinks.style.background = '#1e1b17';
+    navLinks.style.padding = '20px 24px';
+    navLinks.style.gap = '20px';
+    navCta.style.display = isOpen ? 'none' : 'inline-flex';
+  });
+</script>
+
+</body>
+</html>

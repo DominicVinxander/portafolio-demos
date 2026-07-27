@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SINCHI Brewing Co. | Cervecería Artesanal Andina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js"></script>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#" class="logo">SINCHI <span>Brewing Co.</span></a>
+    <ul class="nav-links">
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#cervezas">Cervezas</a></li>
+      <li><a href="#opiniones">Opiniones</a></li>
+      <li><a href="#visitanos">Taproom</a></li>
+    </ul>
+    <a href="https://wa.me/51900000001?text=Hola!%20Quiero%20visitar%20el%20taproom" class="nav-cta">Reservar mesa</a>
+    <button class="menu-toggle" aria-label="Menú"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">Cervecería artesanal · Huancayo</span>
+    <h1>Fuerza andina<br>en cada <em>botella</em></h1>
+    <p>Cerveza artesanal elaborada en pequeños lotes, con maltas de cebada y granos andinos como la kiwicha. Sin prisa, sin atajos.</p>
+    <div class="hero-buttons">
+      <a href="https://wa.me/51900000001?text=Hola!%20Quiero%20visitar%20el%20taproom" class="btn-primary">🍺 Visitar el taproom</a>
+      <a href="#cervezas" class="btn-secondary">Ver cervezas</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1436076863939-06870fe779c2?q=80&w=1200&auto=format&fit=crop" alt="Cerveza artesanal SINCHI" onerror="handleImgError(this)">
+    <div class="hero-stats">
+      <div class="hero-stat"><b>2019</b><span>Desde</span></div>
+      <div class="hero-stat"><b>6</b><span>Estilos</span></div>
+      <div class="hero-stat"><b>100%</b><span>Artesanal</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="historia">
+  <div class="container about-grid">
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1584225064785-c62a8b43d148?q=80&w=800&auto=format&fit=crop" alt="Proceso de elaboración" onerror="handleImgError(this)">
+    </div>
+    <div>
+      <span class="section-tag">Nuestra historia</span>
+      <h2 class="section-title">Cerveza hecha con paciencia, no con prisa</h2>
+      <p class="section-desc">Empezamos en una cocina, probando recetas con ingredientes de la sierra central. Hoy seguimos elaborando en lotes pequeños, controlando cada paso a mano, porque la cerveza artesanal no se apura.</p>
+      <div class="ingredients">
+        <div class="ingredient"><b>4-6</b><span>Semanas de maduración</span></div>
+        <div class="ingredient"><b>100L</b><span>Por lote</span></div>
+        <div class="ingredient"><b>0</b><span>Conservantes</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="beers" id="cervezas">
+  <div class="container">
+    <div class="center" style="max-width:600px;">
+      <span class="section-tag">Nuestras cervezas</span>
+      <h2 class="section-title">La línea SINCHI</h2>
+      <p class="section-desc center">Seis estilos, cada uno con su propio carácter.</p>
+    </div>
+  </div>
+  <div class="beer-grid">
+    <div class="beer-card">
+      <div class="beer-img"><img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?q=80&w=500&auto=format&fit=crop" alt="Sinchi Golden Ale" onerror="handleImgError(this)"></div>
+      <h3>Golden Ale</h3>
+      <span class="beer-style">Rubia con kiwicha andina</span>
+      <p>Ligera y refrescante, con un toque de granos andinos tostados.</p>
+      <div class="beer-specs">
+        <div class="spec"><b>5.2%</b><span>ABV</span></div>
+        <div class="spec"><b>18</b><span>IBU</span></div>
+      </div>
+      <span class="beer-price">S/ 18</span>
+    </div>
+    <div class="beer-card">
+      <div class="beer-img"><img src="https://images.unsplash.com/photo-1518176258769-f227c798150e?q=80&w=500&auto=format&fit=crop" alt="Puma Negra Stout" onerror="handleImgError(this)"></div>
+      <h3>Puma Negra</h3>
+      <span class="beer-style">Stout con cacao andino</span>
+      <p>Cuerpo denso, notas de café y chocolate amargo de la selva central.</p>
+      <div class="beer-specs">
+        <div class="spec"><b>6.8%</b><span>ABV</span></div>
+        <div class="spec"><b>35</b><span>IBU</span></div>
+      </div>
+      <span class="beer-price">S/ 20</span>
+    </div>
+    <div class="beer-card">
+      <div class="beer-img"><img src="https://images.unsplash.com/photo-1568644396922-5c3bfae12211?q=80&w=500&auto=format&fit=crop" alt="Wayra IPA" onerror="handleImgError(this)"></div>
+      <h3>Wayra IPA</h3>
+      <span class="beer-style">IPA de lúpulos cítricos</span>
+      <p>Amarga y aromática, con notas cítricas que refrescan como el viento de altura.</p>
+      <div class="beer-specs">
+        <div class="spec"><b>6.2%</b><span>ABV</span></div>
+        <div class="spec"><b>55</b><span>IBU</span></div>
+      </div>
+      <span class="beer-price">S/ 20</span>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="opiniones">
+  <div class="container">
+    <div class="center" style="max-width:600px;">
+      <span class="section-tag">Lo que dicen</span>
+      <h2 class="section-title">Nuestra comunidad</h2>
+    </div>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>"La Puma Negra es lo mejor que he probado en cerveza artesanal peruana. Increíble balance."</p>
+      <div class="test-author">
+        <div class="avatar">D</div>
+        <div><b>Diego R.</b><span>Cliente frecuente</span></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>"El taproom tiene un ambiente único. Fuimos con amigos y no quisimos irnos."</p>
+      <div class="test-author">
+        <div class="avatar">C</div>
+        <div><b>Camila S.</b><span>Google Reviews</span></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p>"Se nota que cada lote está hecho con cuidado. Mi favorita es la Wayra IPA."</p>
+      <div class="test-author">
+        <div class="avatar">A</div>
+        <div><b>Andrés M.</b><span>Cliente frecuente</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visitanos">
+  <div class="container visit-grid">
+    <div>
+      <span class="section-tag">Taproom</span>
+      <h2 class="section-title">Ven a probarlas en vivo</h2>
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div><h4>Dirección</h4><p>Jr. Cusco 480, Huancayo, Junín</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🕒</div>
+        <div><h4>Horario</h4><p>Jue a Dom: 5:00 pm – 11:00 pm</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📞</div>
+        <div><h4>Reservas</h4><p>+51 900 000 001 (WhatsApp)</p></div>
+      </div>
+    </div>
+    <div class="map-box">
+      <iframe src="https://www.google.com/maps?q=Huancayo,Peru&output=embed" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>¿Listo para probar la fuerza andina?</h2>
+    <p>Reserva tu mesa en el taproom o pregúntanos dónde encontrar nuestras cervezas cerca de ti.</p>
+    <a href="https://wa.me/51900000001?text=Hola!%20Quiero%20visitar%20el%20taproom" class="btn-primary">Reservar por WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <a href="#" class="logo" style="font-size:1.6rem;">SINCHI <span>Brewing Co.</span></a>
+      <p>Cervecería artesanal en Huancayo. Lotes pequeños, ingredientes andinos, cero prisa.</p>
+    </div>
+    <div>
+      <h4>Enlaces</h4>
+      <ul>
+        <li><a href="#historia">Historia</a></li>
+        <li><a href="#cervezas">Cervezas</a></li>
+        <li><a href="#visitanos">Taproom</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li>+51 900 000 001</li>
+        <li>hola@sinchibrewing.pe</li>
+        <li>Jr. Cusco 480, Huancayo</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 SINCHI Brewing Co. — Sitio web de demostración creado por <strong>[Tu marca aquí]</strong>
+  </div>
+</footer>
+
+<a href="https://wa.me/51900000001?text=Hola!%20Quiero%20visitar%20el%20taproom" class="wa-float" aria-label="WhatsApp">💬</a>
+
+</body>
+</html>
