@@ -6,6 +6,23 @@
 <title>El Fogón Wanka | Cocina Huanca Tradicional</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Si una foto no carga (link roto, sin internet, etc.), la reemplazamos
+  // por un fondo de color con un ícono en vez de mostrar el ícono de "imagen rota".
+  function handleImgError(img){
+    var div = document.createElement('div');
+    div.className = img.className;
+    div.style.cssText = img.style.cssText;
+    div.style.background = 'linear-gradient(135deg, #b5452b, #c99a3e)';
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
+    div.style.justifyContent = 'center';
+    div.style.color = '#fff';
+    div.style.fontSize = '2.4rem';
+    div.textContent = '🍽️';
+    if (img.parentNode) img.parentNode.replaceChild(div, img);
+  }
+</script>
 <style>
   :root{
     --terracota:#b5452b;
@@ -169,8 +186,8 @@
 <section class="about" id="nosotros">
   <div class="container about-grid">
     <div class="about-images">
-      <img class="img-main" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=900&auto=format&fit=crop" alt="Ambiente del restaurante">
-      <img class="img-float" src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop" alt="Plato tradicional">
+      <img class="img-main" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=900&auto=format&fit=crop" alt="Ambiente del restaurante" onerror="handleImgError(this)">
+      <img class="img-float" src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop" alt="Plato tradicional" onerror="handleImgError(this)">
     </div>
     <div>
       <span class="section-tag">Nuestra historia</span>
@@ -194,7 +211,7 @@
     </div>
     <div class="menu-grid">
       <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1626200926600-3e7d63f5a5f8?q=80&w=600&auto=format&fit=crop" alt="Papa a la huancaína">
+        <img src="https://images.unsplash.com/photo-1518013431117-eb44ce1cd8e0?q=80&w=600&auto=format&fit=crop" alt="Papa a la huancaína" onerror="handleImgError(this)">
         <div class="menu-card-body">
           <h3>Papa a la Huancaína</h3>
           <p>Papa amarilla bañada en crema de ají amarillo y queso fresco.</p>
@@ -202,7 +219,7 @@
         </div>
       </div>
       <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop" alt="Pachamanca">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop" alt="Pachamanca" onerror="handleImgError(this)">
         <div class="menu-card-body">
           <h3>Pachamanca Mixta</h3>
           <p>Cocción bajo tierra con piedras calientes: pollo, cerdo, cuy y habas.</p>
@@ -210,7 +227,7 @@
         </div>
       </div>
       <div class="menu-card">
-        <img src="https://images.unsplash.com/photo-1432139509613-5c4255815697?q=80&w=600&auto=format&fit=crop" alt="Trucha frita">
+        <img src="https://images.unsplash.com/photo-1432139509613-5c4255815697?q=80&w=600&auto=format&fit=crop" alt="Trucha frita" onerror="handleImgError(this)">
         <div class="menu-card-body">
           <h3>Trucha Frita</h3>
           <p>Trucha fresca del Mantaro, acompañada de arroz y ensalada.</p>
