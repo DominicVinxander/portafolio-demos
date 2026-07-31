@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuevo paciente — Consultorio Bertil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="form-page">
+  <header class="form-topbar">
+    <div class="form-topbar-left">
+      <button class="back-link" id="back-link" style="margin:0;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Volver al panel
+      </button>
+      <div class="divider-v"></div>
+      <div class="form-topbar-brand">
+        <div class="brand-mark small">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6c-3.2 0-5 1.6-6.8 1.6-2 0-3.6-1.2-5.6-1.2C4.8 6.4 3 9.6 3 13.6c0 5.2 2.4 9.6 4 13.6 1 2.6 1.8 5.2 3.6 5.2 1.8 0 2.2-2.4 3-5.6.6-2.4 1.4-5.4 2.8-5.4 1.4 0 2.2 3 2.8 5.4.8 3.2 1.2 5.6 3 5.6 1.8 0 2.6-2.6 3.6-5.2 1.6-4 4-8.4 4-13.6 0-4-1.8-7.2-4.6-7.2-2 0-3.6 1.2-5.6 1.2C25 7.6 23.2 6 20 6z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <div><p>Consultorio Bertil</p><span>Historias clínicas</span></div>
+      </div>
+    </div>
+    <div class="topbar-badge">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 3.5v5.5c0 5-3 9-7 11-4-2-7-6-7-11V5.5L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      Datos protegidos — Ley 29733
+    </div>
+  </header>
+
+  <div class="form-shell">
+    <div class="form-header">
+      <h1>Registrar nuevo paciente</h1>
+      <p>Completa los datos personales y el motivo de la primera consulta. Se guardan directamente en el historial del paciente.</p>
+    </div>
+
+    <!-- ============ FORM ============ -->
+    <div class="panel form-card" id="form-panel">
+      <div class="form-patient-preview">
+        <div class="form-preview-avatar" id="preview-avatar">?</div>
+        <div>
+          <p class="form-preview-name" id="preview-name">Nombre del paciente</p>
+          <p class="form-preview-sub" id="preview-sub">Se completa mientras escribes</p>
+        </div>
+      </div>
+
+      <form id="patient-form">
+        <div class="form-section">
+          <p class="form-section-title">Datos personales</p>
+          <div class="form-grid-2">
+            <div class="form-field full">
+              <label class="field-label" for="f-nombre">Nombres y apellidos completos</label>
+              <input class="field-input" id="f-nombre" type="text" placeholder="Ej. María Fernanda Torres Quispe" required>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="f-doc-tipo">Tipo de documento</label>
+              <select class="field-input" id="f-doc-tipo">
+                <option>DNI</option>
+                <option>Carné de extranjería</option>
+                <option>Documento de menor de edad</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="f-doc-num">Número de documento</label>
+              <input class="field-input" id="f-doc-num" type="text" placeholder="45218903" required>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="f-nacimiento">Fecha de nacimiento</label>
+              <input class="field-input" id="f-nacimiento" type="date" required>
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="f-telefono">Teléfono de contacto</label>
+              <input class="field-input" id="f-telefono" type="tel" placeholder="987 214 356" required>
+            </div>
+
+            <div class="form-field full">
+              <label class="field-label" for="f-direccion">Dirección</label>
+              <input class="field-input" id="f-direccion" type="text" placeholder="Jr. Los Álamos 342, Huancayo">
+            </div>
+
+            <div class="form-field full">
+              <label class="field-label" for="f-apoderado">Apoderado / contacto de emergencia (opcional)</label>
+              <input class="field-input" id="f-apoderado" type="text" placeholder="Nombre y teléfono — solo si el paciente es menor de edad">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <p class="form-section-title">Primera consulta</p>
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label class="field-label" for="f-fecha-consulta">Fecha de la consulta</label>
+              <input class="field-input" id="f-fecha-consulta" type="date" required>
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="f-tipo-consulta">Tipo de atención</label>
+              <select class="field-input" id="f-tipo-consulta">
+                <option>Consulta general</option>
+                <option>Limpieza dental</option>
+                <option>Extracción</option>
+                <option>Endodoncia</option>
+                <option>Resina</option>
+                <option>Control de ortodoncia</option>
+                <option>Odontopediatría</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label class="field-label" for="f-motivo">Motivo de consulta / notas clínicas</label>
+              <textarea class="field-input" id="f-motivo" placeholder="Ej. Paciente refiere dolor en molar inferior derecho desde hace 3 días. Se realiza evaluación y se indica radiografía periapical."></textarea>
+              <p class="field-hint">En el sistema real, aquí también podrás adjuntar fotos y radiografías directamente.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" id="cancel-btn">Cancelar</button>
+          <button type="submit" class="btn-submit" id="submit-btn">
+            <span class="btn-label">Registrar paciente</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/form.js"></script>
+</body>
+</html>

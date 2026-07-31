@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultorio Bertil — Historias Clínicas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================== LOGIN ===================== -->
+<div id="view-login" class="view view-login">
+  <div class="login-shell">
+    <div class="login-brand">
+      <div class="login-brand-inner">
+        <div class="brand-mark">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6c-3.2 0-5 1.6-6.8 1.6-2 0-3.6-1.2-5.6-1.2C4.8 6.4 3 9.6 3 13.6c0 5.2 2.4 9.6 4 13.6 1 2.6 1.8 5.2 3.6 5.2 1.8 0 2.2-2.4 3-5.6.6-2.4 1.4-5.4 2.8-5.4 1.4 0 2.2 3 2.8 5.4.8 3.2 1.2 5.6 3 5.6 1.8 0 2.6-2.6 3.6-5.2 1.6-4 4-8.4 4-13.6 0-4-1.8-7.2-4.6-7.2-2 0-3.6 1.2-5.6 1.2C25 7.6 23.2 6 20 6z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="brand-eyebrow">Historias clínicas digitales</p>
+        <h1 class="brand-title">Consultorio<br>Bertil</h1>
+        <p class="brand-copy">Registro de pacientes, historial de tratamientos e imágenes clínicas, todo en un solo lugar, disponible desde cualquier dispositivo.</p>
+        <div class="brand-footnote">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 3.5v5.5c0 5-3 9-7 11-4-2-7-6-7-11V5.5L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Acceso privado &amp; datos alojados de forma segura</span>
+        </div>
+      </div>
+    </div>
+    <div class="login-form-side">
+      <div class="login-form-wrap">
+        <p class="login-kicker">Bienvenido de vuelta</p>
+        <h2 class="login-title">Inicia sesión</h2>
+        <p class="login-sub">Ingresa con tu cuenta del consultorio</p>
+
+        <form id="login-form">
+          <label class="field-label" for="email">Correo</label>
+          <input class="field-input" type="email" id="email" value="bertil@consultorio.pe">
+
+          <label class="field-label" for="pass">Contraseña</label>
+          <input class="field-input" type="password" id="pass" value="••••••••">
+
+          <button type="submit" class="btn-primary btn-block" id="login-btn">
+            <span class="btn-label">Ingresar</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <div class="demo-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="16" r="0.9" fill="currentColor"/></svg>
+          Vista de demostración con datos de ejemplo — ningún dato aquí es real.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== APP ===================== -->
+<div id="view-app" class="view view-app hidden">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark small">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 6c-3.2 0-5 1.6-6.8 1.6-2 0-3.6-1.2-5.6-1.2C4.8 6.4 3 9.6 3 13.6c0 5.2 2.4 9.6 4 13.6 1 2.6 1.8 5.2 3.6 5.2 1.8 0 2.2-2.4 3-5.6.6-2.4 1.4-5.4 2.8-5.4 1.4 0 2.2 3 2.8 5.4.8 3.2 1.2 5.6 3 5.6 1.8 0 2.6-2.6 3.6-5.2 1.6-4 4-8.4 4-13.6 0-4-1.8-7.2-4.6-7.2-2 0-3.6 1.2-5.6 1.2C25 7.6 23.2 6 20 6z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <p class="sidebar-brand-title">Consultorio Bertil</p>
+        <p class="sidebar-brand-sub">Historias clínicas</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-view="dashboard">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.6" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.6" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.6" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.6" stroke="currentColor" stroke-width="1.7"/></svg>
+        <span>Panel</span>
+      </button>
+      <button class="nav-item" data-view="patients">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M3 20c0-3.6 2.8-6 6-6s6 2.4 6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="17.5" cy="8.5" r="2.6" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 14.4c2.7.2 4.6 2.3 4.6 5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <span>Pacientes</span>
+      </button>
+      <button class="nav-item" data-action="new-patient">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Nuevo paciente</span>
+      </button>
+      <button class="nav-item" data-view="settings">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M19.4 13.5a1.7 1.7 0 000-3l1-1.7-1.7-1.7-1.7 1a1.7 1.7 0 00-3 0l-.2-2h-2.4l-.2 2a1.7 1.7 0 00-3 0l-1.7-1L5 8.8l1 1.7a1.7 1.7 0 000 3l-1 1.7 1.7 1.7 1.7-1a1.7 1.7 0 003 0l.2 2h2.4l.2-2a1.7 1.7 0 003 0l1.7 1 1.7-1.7-1-1.7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <span>Configuración</span>
+      </button>
+    </nav>
+
+    <button class="sidebar-logout" id="logout-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Cerrar sesión</span>
+    </button>
+  </aside>
+
+  <div class="main-col">
+    <header class="topbar">
+      <div class="topbar-search">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <input type="text" id="global-search" placeholder="Buscar paciente por nombre o DNI…">
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 3.5v5.5c0 5-3 9-7 11-4-2-7-6-7-11V5.5L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          Datos protegidos — Ley 29733
+        </div>
+        <div class="topbar-user">
+          <div class="avatar">DB</div>
+          <div class="topbar-user-meta">
+            <p>Dr. Bertil</p>
+            <span>Odontólogo · Titular</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="content-root"></main>
+  </div>
+</div>
+
+<!-- ===================== TEMPLATES ===================== -->
+<template id="tpl-dashboard"></template>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
