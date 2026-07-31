@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferretería El Constructor — Catálogo Online</title>
+<style>
+  :root{
+    --naranja:#e8590c;
+    --naranja-osc:#c94a08;
+    --gris-osc:#1f2328;
+    --gris-med:#495057;
+    --gris-claro:#f4f5f7;
+    --borde:#e2e5e9;
+    --blanco:#ffffff;
+    --verde-wa:#25d366;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--gris-claro);
+    color:var(--gris-osc);
+    line-height:1.5;
+  }
+  a{text-decoration:none;color:inherit;}
+
+  /* Header */
+  header{
+    background:var(--gris-osc);
+    color:#fff;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+  }
+  .header-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 20px;
+    gap:16px;
+    max-width:1200px;
+    margin:0 auto;
+    flex-wrap:wrap;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:800;
+    font-size:1.25rem;
+    white-space:nowrap;
+  }
+  .logo-icon{
+    width:38px;height:38px;
+    background:var(--naranja);
+    border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.2rem;
+  }
+  .search-wrap{
+    flex:1;
+    min-width:220px;
+    max-width:520px;
+    position:relative;
+  }
+  .search-wrap input{
+    width:100%;
+    padding:10px 14px 10px 38px;
+    border-radius:8px;
+    border:none;
+    font-size:.95rem;
+    background:#2c3138;
+    color:#fff;
+  }
+  .search-wrap input::placeholder{color:#9aa1a9;}
+  .search-wrap svg{
+    position:absolute;left:12px;top:50%;transform:translateY(-50%);
+    width:16px;height:16px;opacity:.6;
+  }
+  .cart-btn{
+    display:flex;align-items:center;gap:8px;
+    background:var(--naranja);
+    color:#fff;
+    border:none;
+    padding:10px 16px;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+    font-size:.95rem;
+    white-space:nowrap;
+  }
+  .cart-count{
+    background:#fff;color:var(--naranja);
+    border-radius:50%;
+    width:20px;height:20px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.75rem;font-weight:800;
+  }
+  .cat-bar{
+    background:#2c3138;
+    overflow-x:auto;
+    white-space:nowrap;
+    padding:0 12px;
+  }
+  .cat-bar-inner{
+    display:flex;
+    gap:6px;
+    max-width:1200px;
+    margin:0 auto;
+    padding:8px 8px;
+  }
+  .cat-chip{
+    padding:7px 14px;
+    border-radius:20px;
+    font-size:.85rem;
+    color:#d9dce0;
+    background:transparent;
+    border:1px solid #454c55;
+    cursor:pointer;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .cat-chip.active{
+    background:var(--naranja);
+    border-color:var(--naranja);
+    color:#fff;
+    font-weight:700;
+  }
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(120deg, var(--gris-osc), #343a40);
+    color:#fff;
+    padding:26px 20px;
+    text-align:center;
+  }
+  .hero h1{font-size:1.4rem;font-weight:800;margin-bottom:6px;}
+  .hero p{color:#c8ccd1;font-size:.9rem;}
+
+  /* Main */
+  main{max-width:1200px;margin:0 auto;padding:20px;}
+  .results-info{
+    font-size:.9rem;
+    color:var(--gris-med);
+    margin-bottom:14px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+    gap:16px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid var(--borde);
+    border-radius:10px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transition:transform .15s, box-shadow .15s;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.08);}
+  .card-img{
+    height:110px;
+    background:var(--gris-claro);
+    display:flex;align-items:center;justify-content:center;
+    font-size:2.4rem;
+    border-bottom:1px solid var(--borde);
+  }
+  .card-body{padding:12px 14px;display:flex;flex-direction:column;gap:6px;flex:1;}
+  .card-cat{font-size:.7rem;color:var(--naranja);font-weight:700;text-transform:uppercase;letter-spacing:.03em;}
+  .card-name{font-size:.92rem;font-weight:600;line-height:1.3;min-height:2.4em;}
+  .card-price{font-size:1.1rem;font-weight:800;color:var(--gris-osc);margin-top:auto;}
+  .card-unit{font-size:.75rem;color:var(--gris-med);font-weight:500;}
+  .add-btn{
+    margin-top:8px;
+    background:var(--gris-osc);
+    color:#fff;
+    border:none;
+    padding:9px;
+    border-radius:7px;
+    font-weight:700;
+    font-size:.85rem;
+    cursor:pointer;
+    transition:background .15s;
+  }
+  .add-btn:hover{background:var(--naranja);}
+  .add-btn.added{background:var(--verde-wa);}
+
+  .no-results{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--gris-med);
+  }
+
+  /* Cart drawer */
+  .overlay{
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.4);
+    z-index:90;
+    display:none;
+  }
+  .overlay.open{display:block;}
+  .drawer{
+    position:fixed;
+    top:0;right:0;
+    width:100%;
+    max-width:400px;
+    height:100%;
+    background:#fff;
+    z-index:100;
+    transform:translateX(100%);
+    transition:transform .25s ease;
+    display:flex;
+    flex-direction:column;
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-header{
+    padding:18px 20px;
+    border-bottom:1px solid var(--borde);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .drawer-header h2{font-size:1.1rem;}
+  .drawer-close{
+    background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--gris-med);
+  }
+  .drawer-items{flex:1;overflow-y:auto;padding:12px 20px;}
+  .drawer-item{
+    display:flex;gap:10px;align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid var(--borde);
+  }
+  .drawer-item .di-icon{
+    width:44px;height:44px;background:var(--gris-claro);border-radius:8px;
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;
+  }
+  .di-info{flex:1;min-width:0;}
+  .di-name{font-size:.85rem;font-weight:600;}
+  .di-price{font-size:.8rem;color:var(--gris-med);}
+  .di-qty{display:flex;align-items:center;gap:8px;}
+  .qty-btn{
+    width:24px;height:24px;border-radius:6px;border:1px solid var(--borde);
+    background:#fff;cursor:pointer;font-weight:700;font-size:.85rem;
+  }
+  .qty-val{min-width:16px;text-align:center;font-size:.85rem;font-weight:600;}
+  .remove-btn{
+    background:none;border:none;color:#c92a2a;font-size:.75rem;cursor:pointer;margin-left:6px;
+  }
+  .drawer-empty{
+    text-align:center;color:var(--gris-med);padding:40px 10px;font-size:.9rem;
+  }
+  .drawer-footer{
+    padding:16px 20px 20px;
+    border-top:1px solid var(--borde);
+  }
+  .drawer-total{
+    display:flex;justify-content:space-between;
+    font-size:1.05rem;font-weight:800;
+    margin-bottom:12px;
+  }
+  .wa-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--verde-wa);
+    color:#fff;
+    border:none;
+    width:100%;
+    padding:13px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:.95rem;
+    cursor:pointer;
+  }
+  .wa-btn:disabled{background:#adb5bd;cursor:not-allowed;}
+  .wa-hint{font-size:.72rem;color:var(--gris-med);text-align:center;margin-top:8px;}
+
+  footer{
+    background:var(--gris-osc);
+    color:#c8ccd1;
+    text-align:center;
+    padding:24px 20px;
+    font-size:.82rem;
+    margin-top:30px;
+  }
+  footer strong{color:#fff;}
+
+  .demo-banner{
+    background:#fff3bf;
+    color:#664d03;
+    text-align:center;
+    font-size:.78rem;
+    padding:6px 10px;
+    font-weight:600;
+  }
+
+  @media (max-width:480px){
+    .hero h1{font-size:1.15rem;}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));}
+    .card-img{height:90px;font-size:2rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">DEMO — catálogo de ejemplo para presentación al cliente. Productos, precios y datos son ilustrativos.</div>
+
+<header>
+  <div class="header-top">
+    <div class="logo"><span class="logo-icon">🔧</span> Ferretería El Constructor</div>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Buscar productos... (ej: martillo, cable, pintura)">
+    </div>
+    <button class="cart-btn" id="cartBtn">
+      🛒 Pedido <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+  <div class="cat-bar">
+    <div class="cat-bar-inner" id="catBar"></div>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Todo para tu obra, en un solo lugar</h1>
+  <p>Arma tu pedido y confírmalo directo por WhatsApp — sin registro, sin complicaciones.</p>
+</div>
+
+<main>
+  <div class="results-info" id="resultsInfo"></div>
+  <div class="grid" id="productGrid"></div>
+  <div class="no-results" id="noResults" style="display:none;">
+    No se encontraron productos. Prueba con otra búsqueda o categoría.
+  </div>
+</main>
+
+<footer>
+  <p><strong>Ferretería El Constructor</strong> — Catálogo online de demostración</p>
+  <p>📍 Dirección referencial &nbsp;|&nbsp; 📞 999 999 999 &nbsp;|&nbsp; Lun–Sáb 8am–7pm</p>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <h2>Tu pedido</h2>
+    <button class="drawer-close" id="drawerClose">✕</button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-footer">
+    <div class="drawer-total"><span>Total</span><span id="drawerTotal">S/ 0.00</span></div>
+    <button class="wa-btn" id="waBtn" disabled>
+      <span>📲</span> Confirmar pedido por WhatsApp
+    </button>
+    <p class="wa-hint">Se abrirá WhatsApp con el resumen de tu pedido listo para enviar.</p>
+  </div>
+</div>
+
+<script>
+// ---------- Datos de ejemplo (catálogo demo) ----------
+const WHATSAPP_NUMBER = "51999999999"; // reemplazar por el número real del cliente
+
+const PRODUCTS = [
+  {id:1, name:"Martillo de uña 16oz mango fibra", cat:"Herramientas Manuales", price:32.90, unit:"unidad", icon:"🔨"},
+  {id:2, name:"Juego de destornilladores 6 piezas", cat:"Herramientas Manuales", price:24.50, unit:"juego", icon:"🪛"},
+  {id:3, name:"Alicate universal 8\"", cat:"Herramientas Manuales", price:18.00, unit:"unidad", icon:"🔧"},
+  {id:4, name:"Llave inglesa ajustable 10\"", cat:"Herramientas Manuales", price:29.90, unit:"unidad", icon:"🔧"},
+  {id:5, name:"Cinta métrica 5m", cat:"Herramientas Manuales", price:12.90, unit:"unidad", icon:"📏"},
+  {id:6, name:"Nivel de burbuja 60cm", cat:"Herramientas Manuales", price:22.00, unit:"unidad", icon:"📐"},
+  {id:7, name:"Taladro percutor 1/2\" 650W", cat:"Herramientas Eléctricas", price:189.00, unit:"unidad", icon:"🛠️"},
+  {id:8, name:"Amoladora angular 4.5\" 750W", cat:"Herramientas Eléctricas", price:145.00, unit:"unidad", icon:"⚙️"},
+  {id:9, name:"Sierra circular 7 1/4\"", cat:"Herramientas Eléctricas", price:265.00, unit:"unidad", icon:"⚙️"},
+  {id:10, name:"Rotomartillo SDS 800W", cat:"Herramientas Eléctricas", price:399.00, unit:"unidad", icon:"🛠️"},
+  {id:11, name:"Atornillador inalámbrico 12V", cat:"Herramientas Eléctricas", price:159.00, unit:"unidad", icon:"🔋"},
+  {id:12, name:"Tubo PVC 1/2\" x 5m", cat:"Plomería", price:14.50, unit:"unidad", icon:"🚰"},
+  {id:13, name:"Codo PVC 90° 1/2\"", cat:"Plomería", price:1.20, unit:"unidad", icon:"🔩"},
+  {id:14, name:"Llave de paso 1/2\"", cat:"Plomería", price:16.90, unit:"unidad", icon:"🚿"},
+  {id:15, name:"Cinta teflón 1/2\"", cat:"Plomería", price:2.50, unit:"unidad", icon:"🎗️"},
+  {id:16, name:"Sifón para lavatorio PVC", cat:"Plomería", price:19.90, unit:"unidad", icon:"🚰"},
+  {id:17, name:"Silicona sellador transparente", cat:"Plomería", price:11.00, unit:"tubo", icon:"🧴"},
+  {id:18, name:"Cable eléctrico THW 12 AWG (rollo 100m)", cat:"Electricidad", price:189.00, unit:"rollo", icon:"🔌"},
+  {id:19, name:"Interruptor simple", cat:"Electricidad", price:6.50, unit:"unidad", icon:"💡"},
+  {id:20, name:"Tomacorriente doble con tierra", cat:"Electricidad", price:9.90, unit:"unidad", icon:"🔌"},
+  {id:21, name:"Foco LED 12W luz cálida", cat:"Electricidad", price:8.90, unit:"unidad", icon:"💡"},
+  {id:22, name:"Caja de pase octogonal PVC", cat:"Electricidad", price:3.20, unit:"unidad", icon:"📦"},
+  {id:23, name:"Tablero eléctrico 4 polos", cat:"Electricidad", price:45.00, unit:"unidad", icon:"⚡"},
+  {id:24, name:"Pintura látex blanco 4L", cat:"Pintura", price:69.90, unit:"balde", icon:"🎨"},
+  {id:25, name:"Pintura esmalte sintético 1L", cat:"Pintura", price:28.50, unit:"lata", icon:"🎨"},
+  {id:26, name:"Rodillo + bandeja set", cat:"Pintura", price:16.90, unit:"set", icon:"🖌️"},
+  {id:27, name:"Brocha 3\"", cat:"Pintura", price:7.50, unit:"unidad", icon:"🖌️"},
+  {id:28, name:"Lija al agua N°120 (x10 hojas)", cat:"Pintura", price:9.90, unit:"paquete", icon:"📄"},
+  {id:29, name:"Cemento Portland tipo I (bolsa 42.5kg)", cat:"Ferretería General", price:32.50, unit:"bolsa", icon:"🏗️"},
+  {id:30, name:"Clavos 2\" (kg)", cat:"Ferretería General", price:6.90, unit:"kg", icon:"📌"},
+  {id:31, name:"Tornillos autorroscantes 1\" (x100)", cat:"Ferretería General", price:8.90, unit:"paquete", icon:"🔩"},
+  {id:32, name:"Candado 40mm", cat:"Ferretería General", price:22.90, unit:"unidad", icon:"🔒"},
+  {id:33, name:"Cadena galvanizada 5mm (metro)", cat:"Ferretería General", price:4.50, unit:"metro", icon:"⛓️"},
+  {id:34, name:"Malla mosquitera 1.2m (metro)", cat:"Ferretería General", price:9.90, unit:"metro", icon:"🪟"},
+  {id:35, name:"Casco de seguridad", cat:"Seguridad Industrial", price:24.90, unit:"unidad", icon:"⛑️"},
+  {id:36, name:"Guantes de cuero reforzado", cat:"Seguridad Industrial", price:14.90, unit:"par", icon:"🧤"},
+  {id:37, name:"Lentes de protección", cat:"Seguridad Industrial", price:9.90, unit:"unidad", icon:"🥽"},
+  {id:38, name:"Arnés de seguridad", cat:"Seguridad Industrial", price:129.00, unit:"unidad", icon:"🦺"},
+  {id:39, name:"Manguera de jardín 15m", cat:"Jardín", price:45.00, unit:"unidad", icon:"🌿"},
+  {id:40, name:"Tijera podadora", cat:"Jardín", price:22.90, unit:"unidad", icon:"✂️"},
+];
+
+const CATEGORIES = ["Todos", ...Array.from(new Set(PRODUCTS.map(p => p.cat)))];
+
+// ---------- Estado ----------
+let activeCategory = "Todos";
+let searchTerm = "";
+let cart = JSON.parse(localStorage.getItem("ferreteria_cart_demo") || "{}");
+
+// ---------- Render categorías ----------
+const catBar = document.getElementById("catBar");
+CATEGORIES.forEach(cat => {
+  const chip = document.createElement("button");
+  chip.className = "cat-chip" + (cat === activeCategory ? " active" : "");
+  chip.textContent = cat;
+  chip.onclick = () => {
+    activeCategory = cat;
+    document.querySelectorAll(".cat-chip").forEach(c => c.classList.remove("active"));
+    chip.classList.add("active");
+    renderProducts();
+  };
+  catBar.appendChild(chip);
+});
+
+// ---------- Render productos ----------
+const grid = document.getElementById("productGrid");
+const resultsInfo = document.getElementById("resultsInfo");
+const noResults = document.getElementById("noResults");
+
+function money(n){ return "S/ " + n.toFixed(2); }
+
+function renderProducts(){
+  const term = searchTerm.trim().toLowerCase();
+  const filtered = PRODUCTS.filter(p => {
+    const matchCat = activeCategory === "Todos" || p.cat === activeCategory;
+    const matchTerm = !term || p.name.toLowerCase().includes(term) || p.cat.toLowerCase().includes(term);
+    return matchCat && matchTerm;
+  });
+
+  resultsInfo.textContent = `${filtered.length} producto${filtered.length !== 1 ? "s" : ""} encontrado${filtered.length !== 1 ? "s" : ""}`;
+  grid.innerHTML = "";
+  noResults.style.display = filtered.length ? "none" : "block";
+
+  filtered.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-img">${p.icon}</div>
+      <div class="card-body">
+        <span class="card-cat">${p.cat}</span>
+        <span class="card-name">${p.name}</span>
+        <div>
+          <span class="card-price">${money(p.price)}</span>
+          <span class="card-unit"> / ${p.unit}</span>
+        </div>
+        <button class="add-btn" data-id="${p.id}">Agregar al pedido</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  grid.querySelectorAll(".add-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = Number(btn.dataset.id);
+      addToCart(id);
+      btn.textContent = "✓ Agregado";
+      btn.classList.add("added");
+      setTimeout(() => {
+        btn.textContent = "Agregar al pedido";
+        btn.classList.remove("added");
+      }, 900);
+    });
+  });
+}
+
+// ---------- Búsqueda ----------
+document.getElementById("searchInput").addEventListener("input", (e) => {
+  searchTerm = e.target.value;
+  renderProducts();
+});
+
+// ---------- Carrito ----------
+function saveCart(){
+  localStorage.setItem("ferreteria_cart_demo", JSON.stringify(cart));
+}
+
+function addToCart(id){
+  cart[id] = (cart[id] || 0) + 1;
+  saveCart();
+  updateCartUI();
+}
+
+function changeQty(id, delta){
+  cart[id] = (cart[id] || 0) + delta;
+  if (cart[id] <= 0) delete cart[id];
+  saveCart();
+  updateCartUI();
+}
+
+function removeFromCart(id){
+  delete cart[id];
+  saveCart();
+  updateCartUI();
+}
+
+function cartTotal(){
+  return Object.entries(cart).reduce((sum, [id, qty]) => {
+    const p = PRODUCTS.find(x => x.id === Number(id));
+    return sum + (p ? p.price * qty : 0);
+  }, 0);
+}
+
+function cartItemCount(){
+  return Object.values(cart).reduce((a,b) => a+b, 0);
+}
+
+function updateCartUI(){
+  const count = cartItemCount();
+  document.getElementById("cartCount").textContent = count;
+
+  const itemsWrap = document.getElementById("drawerItems");
+  const entries = Object.entries(cart);
+
+  if (!entries.length){
+    itemsWrap.innerHTML = `<div class="drawer-empty">Tu pedido está vacío.<br>Agrega productos del catálogo.</div>`;
+  } else {
+    itemsWrap.innerHTML = entries.map(([id, qty]) => {
+      const p = PRODUCTS.find(x => x.id === Number(id));
+      if (!p) return "";
+      return `
+        <div class="drawer-item">
+          <div class="di-icon">${p.icon}</div>
+          <div class="di-info">
+            <div class="di-name">${p.name}</div>
+            <div class="di-price">${money(p.price)} / ${p.unit}</div>
+            <div class="di-qty">
+              <button class="qty-btn" onclick="changeQty(${p.id}, -1)">−</button>
+              <span class="qty-val">${qty}</span>
+              <button class="qty-btn" onclick="changeQty(${p.id}, 1)">+</button>
+              <button class="remove-btn" onclick="removeFromCart(${p.id})">Quitar</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  const total = cartTotal();
+  document.getElementById("drawerTotal").textContent = money(total);
+  document.getElementById("waBtn").disabled = entries.length === 0;
+}
+
+// ---------- Drawer open/close ----------
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("overlay");
+
+function openDrawer(){
+  drawer.classList.add("open");
+  overlay.classList.add("open");
+}
+function closeDrawer(){
+  drawer.classList.remove("open");
+  overlay.classList.remove("open");
+}
+
+document.getElementById("cartBtn").addEventListener("click", openDrawer);
+document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+overlay.addEventListener("click", closeDrawer);
+
+// ---------- Enviar por WhatsApp ----------
+document.getElementById("waBtn").addEventListener("click", () => {
+  const entries = Object.entries(cart);
+  if (!entries.length) return;
+
+  let msg = "Hola, quisiera hacer el siguiente pedido:\n\n";
+  entries.forEach(([id, qty]) => {
+    const p = PRODUCTS.find(x => x.id === Number(id));
+    if (p) msg += `• ${p.name} x${qty} — ${money(p.price * qty)}\n`;
+  });
+  msg += `\nTotal: ${money(cartTotal())}`;
+
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  window.open(url, "_blank");
+});
+
+// ---------- Init ----------
+renderProducts();
+updateCartUI();
+</script>
+
+</body>
+</html>
