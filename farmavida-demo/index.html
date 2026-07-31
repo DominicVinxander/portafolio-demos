@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FARMAVIDA | Sistema de Gestión — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/vendor/chart.umd.js"></script>
+<script src="js/vendor/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div class="login-wrap" id="login-wrap">
+  <div class="login-box">
+    <div class="login-brand">FARMAVIDA <span class="badge">Droguería Nacional</span></div>
+    <p class="login-sub">Sistema de gestión — inicia sesión según tu rol</p>
+
+    <form class="login-form" id="login-form">
+      <label for="login-usuario">Usuario</label>
+      <input type="text" id="login-usuario" placeholder="ej. jefe.general" autocomplete="off" required>
+      <label for="login-clave">Contraseña</label>
+      <input type="password" id="login-clave" placeholder="••••••••" required>
+      <button type="submit">Ingresar</button>
+      <p class="login-error" id="login-error">Usuario o contraseña incorrectos.</p>
+    </form>
+
+    <div class="login-demo-box">
+      <b>Usuarios de prueba (clic para autocompletar)</b>
+      <ul id="login-demo-list">
+        <li data-usuario="jefe.general" data-clave="demo123"><span>Jefe General</span><code>jefe.general / demo123</code></li>
+        <li data-usuario="jefe.centro" data-clave="demo123"><span>Jefe de Zona Centro</span><code>jefe.centro / demo123</code></li>
+        <li data-usuario="empleado.huancayo" data-clave="demo123"><span>Empleado Tienda Huancayo</span><code>empleado.huancayo / demo123</code></li>
+        <li data-usuario="cliente.demo" data-clave="demo123"><span>Cliente</span><code>cliente.demo / demo123</code></li>
+      </ul>
+      <p class="login-note">⚠ Demo con datos ficticios. En el sistema real cada usuario tiene su propia cuenta y contraseña cifrada.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app">
+
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">FARMAVIDA <span class="badge">Droguería Nacional</span></div>
+    <div class="role-tabs" id="role-tabs">
+      <button class="role-tab" data-role="cliente">Cliente</button>
+      <button class="role-tab" data-role="empleado">Empleado de Tienda</button>
+      <button class="role-tab" data-role="jefezona">Jefe de Zona</button>
+      <button class="role-tab" data-role="jefegeneral">Jefe General</button>
+      <button class="role-tab" data-role="usuarios" id="tab-usuarios">👥 Usuarios</button>
+    </div>
+    <div class="user-box">
+      <span id="user-name-badge"></span>
+      <button class="logout-btn" id="logout-btn">Salir</button>
+    </div>
+  </div>
+  <div class="container">
+    <span class="demo-flag">⚠ Demo con datos ficticios — aquí puedes navegar libremente entre vistas para la presentación; en el sistema real cada usuario solo entra a su propio panel.</span>
+  </div>
+</div>
+
+<!-- ============ VISTA CLIENTE ============ -->
+<div class="vista" id="vista-cliente">
+  <div class="container">
+    <div class="page-head">
+      <span class="pill">Catálogo</span>
+      <h1>Productos disponibles</h1>
+      <p id="cliente-greet">Precios y ofertas vigentes en tu tienda más cercana.</p>
+    </div>
+    <div class="tienda-select">📍 Comprando en: <b>Tienda Huancayo — Zona Centro</b></div>
+    <div class="catalogo-layout">
+      <div class="product-grid" id="product-grid"></div>
+      <div class="cart-box">
+        <h3>🛒 Tu carrito</h3>
+        <ul class="cart-items" id="cart-items"><li class="cart-empty">Tu carrito está vacío</li></ul>
+        <div class="cart-total"><span>Total</span><span id="cart-total-amount">S/ 0.00</span></div>
+        <button class="checkout-btn" id="checkout-btn" disabled>Proceder al pago</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ VISTA EMPLEADO DE TIENDA ============ -->
+<div class="vista" id="vista-empleado">
+  <div class="container">
+    <div class="page-head">
+      <span class="pill">Empleado · Tienda Huancayo</span>
+      <h1>Panel de tienda</h1>
+      <p>Gestiona productos, precios y valida pagos de tus clientes.</p>
+    </div>
+    <div class="stat-mini-grid">
+      <div class="stat-mini"><b>S/ 2,840</b><span>Ventas del mes</span></div>
+      <div class="stat-mini"><b>36</b><span>Pedidos atendidos</span></div>
+      <div class="stat-mini" id="stat-pendientes-emp"><b>2</b><span>Pagos pendientes</span></div>
+    </div>
+    <div class="emp-grid">
+      <div>
+        <div class="panel">
+          <h3>Pedidos recientes</h3>
+          <table class="data-table">
+            <thead><tr><th>ID</th><th>Cliente</th><th>Monto</th><th>Método</th><th>Comprobante</th><th>Estado</th><th></th></tr></thead>
+            <tbody id="tabla-pedidos"></tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <h3>Agregar producto nuevo</h3>
+          <form class="add-product-form" id="add-product-form">
+            <input type="text" placeholder="Nombre del producto" required>
+            <select id="add-product-cat" required>
+              <option value="">Categoría…</option>
+              <option>Analgésicos</option>
+              <option>Antiinflamatorios</option>
+              <option>Antibióticos</option>
+              <option>Antialérgicos</option>
+              <option>Digestivos</option>
+              <option>Cuidado personal</option>
+              <option>Bioseguridad</option>
+              <option>Suplementos</option>
+              <option>Hidratación</option>
+              <option>Equipos</option>
+              <option>Respiratorio</option>
+              <option value="__otra">+ Otra categoría…</option>
+            </select>
+            <input type="text" id="add-product-cat-otra" placeholder="Nombre de la nueva categoría" style="display:none;">
+            <input type="number" step="0.10" placeholder="Precio (S/)" required>
+            <input type="number" placeholder="Stock inicial" required>
+            <button type="submit">+ Agregar producto</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Precios de mis productos</h3>
+      <table class="data-table">
+        <thead><tr><th>Producto</th><th>Categoría</th><th>Precio (S/)</th><th></th></tr></thead>
+        <tbody id="tabla-productos-emp"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ VISTA JEFE DE ZONA ============ -->
+<div class="vista" id="vista-jefezona">
+  <div class="container">
+    <div class="page-head">
+      <span class="pill">Jefe de Zona · Zona Centro</span>
+      <h1>Reportes de la zona</h1>
+      <p>Desempeño de las tiendas bajo tu zona, por tienda, empleado y fecha.</p>
+    </div>
+    <div class="filter-row">
+      <select id="filtro-tienda-zona">
+        <option value="todas">Todas las tiendas</option>
+        <option value="Tienda Huancayo">Tienda Huancayo</option>
+        <option value="Tienda Concepción">Tienda Concepción</option>
+        <option value="Tienda Jauja">Tienda Jauja</option>
+        <option value="Tienda Tarma">Tienda Tarma</option>
+      </select>
+      <input type="date" id="fecha-desde-zona" value="2026-07-01"> <input type="date" id="fecha-hasta-zona" value="2026-07-31">
+    </div>
+    <div class="dash-grid">
+      <div class="stat-mini"><b id="stat-ventas-zona">S/ 20,170</b><span>Ventas de la zona</span></div>
+      <div class="stat-mini"><b id="stat-tiendas-zona">4</b><span>Tiendas activas</span></div>
+      <div class="stat-mini"><b id="stat-empleados-zona">16</b><span>Empleados</span></div>
+      <div class="stat-mini"><b>+12%</b><span>Vs. mes anterior</span></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-box"><h3>Ventas por tienda</h3><canvas id="chart-tiendas-zona"></canvas></div>
+      <div class="chart-box"><h3>Ventas por empleado</h3><canvas id="chart-empleados"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Reporte de ventas por empleado</h3>
+      <table class="data-table">
+        <thead><tr><th>Empleado</th><th>Tienda</th><th>Ventas (S/)</th><th>Pedidos</th><th>Ticket promedio</th></tr></thead>
+        <tbody id="tabla-reporte-empleados-zona"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ VISTA JEFE GENERAL ============ -->
+<div class="vista" id="vista-jefegeneral">
+  <div class="container">
+    <div class="page-head">
+      <span class="pill">Jefe General · Nivel Nacional</span>
+      <h1>Reportes nacionales <span class="live-badge" id="live-badge">🔴 EN VIVO</span></h1>
+      <p>Vista consolidada de las 10 zonas a nivel nacional, actualizada en tiempo real.</p>
+    </div>
+    <div class="filter-row">
+      <select id="filtro-zona-general">
+        <option value="todas">Todas las zonas</option>
+        <option>Zona Centro</option><option>Zona Lima Metropolitana</option><option>Zona Norte</option><option>Zona Sur</option>
+      </select>
+      <input type="date" id="fecha-desde-general" value="2026-07-01"> <input type="date" id="fecha-hasta-general" value="2026-07-31">
+      <button class="download-btn" id="descargar-reporte-btn">⬇ Descargar reporte (CSV)</button>
+    </div>
+    <div class="dash-grid">
+      <div class="stat-mini"><b id="stat-ventas-nacional">S/ 209,170</b><span>Ventas nacionales</span></div>
+      <div class="stat-mini"><b>10</b><span>Zonas activas</span></div>
+      <div class="stat-mini"><b>~100</b><span>Empleados totales</span></div>
+      <div class="stat-mini"><b>+8%</b><span>Vs. mes anterior</span></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-box"><h3>Ventas por zona</h3><canvas id="chart-zonas-nacional"></canvas></div>
+      <div class="chart-box"><h3>Tendencia de ventas (julio)</h3><canvas id="chart-tendencia"></canvas></div>
+    </div>
+
+    <div class="reportes-grid">
+      <div class="panel">
+        <h3>Reporte por zona <span class="sort-hint">(clic en columna para ordenar)</span></h3>
+        <table class="data-table sortable">
+          <thead><tr>
+            <th data-sort="nombre">Zona</th><th data-sort="ventas">Ventas (S/)</th>
+            <th data-sort="tiendas">Tiendas</th><th data-sort="empleados">Empleados</th>
+            <th data-sort="pedidos">Pedidos</th><th>Ticket prom.</th>
+          </tr></thead>
+          <tbody id="tabla-zonas-general"></tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <h3>Reporte por empleado (top nacional)</h3>
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Empleado</th><th>Zona / Tienda</th><th>Ventas (S/)</th></tr></thead>
+          <tbody id="tabla-empleados-general"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Actividad reciente <span class="sort-hint">(simulada en vivo)</span></h3>
+      <ul class="activity-feed" id="actividad-feed"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ VISTA GESTIÓN DE USUARIOS ============ -->
+<div class="vista" id="vista-usuarios">
+  <div class="container">
+    <div class="page-head">
+      <span class="pill">Jefe General · Administración</span>
+      <h1>Gestión de usuarios y roles</h1>
+      <p>Crea cuentas y asigna el rol correspondiente: Cliente, Empleado de Tienda, Jefe de Zona o Jefe General.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Crear nuevo usuario <span class="sort-hint" id="limite-usuarios-label">(2 disponibles en esta demo)</span></h3>
+      <form class="user-form" id="user-form">
+        <input type="text" id="uf-nombre" placeholder="Nombre completo" required>
+        <input type="email" id="uf-correo" placeholder="Correo electrónico" required>
+        <select id="uf-rol" required>
+          <option value="">Selecciona un rol…</option>
+          <option value="cliente">Cliente</option>
+          <option value="empleado">Empleado de Tienda</option>
+          <option value="jefezona">Jefe de Zona</option>
+          <option value="jefegeneral">Jefe General</option>
+        </select>
+        <input type="text" id="uf-zona" placeholder="Zona (ej. Zona Centro)">
+        <input type="text" id="uf-tienda" placeholder="Tienda (si aplica)">
+        <input type="text" id="uf-usuario" placeholder="Usuario de acceso" required>
+        <button type="submit">+ Crear usuario</button>
+      </form>
+      <p class="user-form-msg" id="user-form-msg"></p>
+    </div>
+
+    <div class="panel">
+      <h3>Usuarios registrados</h3>
+      <table class="data-table">
+        <thead><tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Zona</th><th>Tienda</th><th>Usuario</th></tr></thead>
+        <tbody id="tabla-usuarios"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</div><!-- /#app -->
+
+<!-- ============ MODAL CHECKOUT ============ -->
+<div class="modal-overlay" id="checkout-modal">
+  <div class="modal-box">
+    <button class="close-modal" id="close-modal">✕</button>
+
+    <div id="modal-step-metodo">
+      <h2>Elige tu método de pago</h2>
+      <p class="sub">Selecciona cómo quieres pagar tu pedido.</p>
+      <div class="pay-methods">
+        <div class="pay-method" data-metodo="Yape"><span>💜</span>Yape</div>
+        <div class="pay-method" data-metodo="Plin"><span>💚</span>Plin</div>
+        <div class="pay-method" data-metodo="QR"><span>📱</span>QR</div>
+        <div class="pay-method" data-metodo="Transferencia"><span>🏦</span>Transferencia</div>
+      </div>
+      <div class="pay-details" id="pay-details" style="display:none;">
+        <div id="pay-detail-content"></div>
+      </div>
+
+      <input type="file" id="voucher-input" accept="image/*" style="display:none;">
+      <button class="upload-btn" id="upload-trigger-btn" style="display:none;">📎 Adjuntar foto del comprobante (Yape/Plin/transferencia)</button>
+      <div class="voucher-preview" id="voucher-preview" style="display:none;">
+        <img id="voucher-preview-img" src="" alt="Comprobante adjuntado">
+        <span id="voucher-filename"></span>
+      </div>
+
+      <button class="confirm-btn" id="confirm-pay-btn" style="display:none;" disabled>He realizado el pago</button>
+    </div>
+
+    <div id="modal-step-ok" style="display:none;">
+      <div class="confirm-ok">
+        <div class="check">✓</div>
+        <h2>¡Pedido registrado!</h2>
+        <p class="sub">Tu comprobante fue enviado a la tienda. Quedará pendiente de validación por el empleado y luego recibirás tu boleta.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL VER COMPROBANTE ============ -->
+<div class="modal-overlay" id="voucher-modal">
+  <div class="modal-box voucher-box">
+    <button class="close-modal" id="close-voucher-modal">✕</button>
+    <h2>Comprobante de pago</h2>
+    <p class="sub" id="voucher-modal-sub"></p>
+    <img id="voucher-img" src="" alt="Comprobante de pago">
+  </div>
+</div>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
