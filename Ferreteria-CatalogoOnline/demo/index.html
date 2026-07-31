@@ -14,6 +14,8 @@
     --borde:#e2e5e9;
     --blanco:#ffffff;
     --verde-wa:#25d366;
+    --amarillo:#e8a90c;
+    --verde-ok:#2f9e44;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
@@ -78,6 +80,7 @@
     position:absolute;left:12px;top:50%;transform:translateY(-50%);
     width:16px;height:16px;opacity:.6;
   }
+  .header-actions{display:flex;align-items:center;gap:8px;}
   .cart-btn{
     display:flex;align-items:center;gap:8px;
     background:var(--naranja);
@@ -90,6 +93,19 @@
     font-size:.95rem;
     white-space:nowrap;
   }
+  .admin-btn{
+    display:flex;align-items:center;gap:6px;
+    background:transparent;
+    color:#d9dce0;
+    border:1px solid #454c55;
+    padding:9px 12px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    font-size:.8rem;
+    white-space:nowrap;
+  }
+  .admin-btn:hover{border-color:var(--naranja);color:#fff;}
   .cart-count{
     background:#fff;color:var(--naranja);
     border-radius:50%;
@@ -193,19 +209,21 @@
     color:var(--gris-med);
   }
 
-  /* Cart drawer */
+  /* Overlay compartido */
   .overlay{
     position:fixed;inset:0;
-    background:rgba(0,0,0,.4);
+    background:rgba(0,0,0,.45);
     z-index:90;
     display:none;
   }
   .overlay.open{display:block;}
+
+  /* Cart drawer */
   .drawer{
     position:fixed;
     top:0;right:0;
     width:100%;
-    max-width:400px;
+    max-width:420px;
     height:100%;
     background:#fff;
     z-index:100;
@@ -258,9 +276,9 @@
     font-size:1.05rem;font-weight:800;
     margin-bottom:12px;
   }
-  .wa-btn{
+  .primary-btn{
     display:flex;align-items:center;justify-content:center;gap:8px;
-    background:var(--verde-wa);
+    background:var(--naranja);
     color:#fff;
     border:none;
     width:100%;
@@ -270,8 +288,77 @@
     font-size:.95rem;
     cursor:pointer;
   }
-  .wa-btn:disabled{background:#adb5bd;cursor:not-allowed;}
+  .primary-btn:disabled{background:#adb5bd;cursor:not-allowed;}
+  .wa-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:transparent;
+    color:var(--verde-wa);
+    border:1.5px solid var(--verde-wa);
+    width:100%;
+    padding:11px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:.88rem;
+    cursor:pointer;
+    margin-top:8px;
+  }
+  .wa-btn:disabled{border-color:#adb5bd;color:#adb5bd;cursor:not-allowed;}
   .wa-hint{font-size:.72rem;color:var(--gris-med);text-align:center;margin-top:8px;}
+
+  /* Checkout con voucher */
+  .checkout-step{display:none;flex:1;overflow-y:auto;padding:16px 20px;}
+  .checkout-step.open{display:block;}
+  .checkout-back{
+    background:none;border:none;color:var(--gris-med);font-size:.82rem;
+    cursor:pointer;margin-bottom:14px;display:flex;align-items:center;gap:4px;
+  }
+  .pago-info{
+    background:var(--gris-claro);
+    border-radius:8px;
+    padding:12px 14px;
+    margin-bottom:16px;
+    font-size:.82rem;
+  }
+  .pago-info strong{display:block;margin-bottom:4px;font-size:.85rem;}
+  .pago-linea{display:flex;justify-content:space-between;padding:3px 0;color:var(--gris-med);}
+  .pago-linea b{color:var(--gris-osc);}
+  .form-field{margin-bottom:14px;}
+  .form-field label{display:block;font-size:.8rem;font-weight:600;margin-bottom:5px;}
+  .form-field input[type="text"], .form-field input[type="tel"]{
+    width:100%;padding:9px 12px;border:1px solid var(--borde);border-radius:7px;font-size:.88rem;
+  }
+  .file-drop{
+    border:1.5px dashed var(--borde);
+    border-radius:8px;
+    padding:16px;
+    text-align:center;
+    font-size:.82rem;
+    color:var(--gris-med);
+    cursor:pointer;
+    position:relative;
+  }
+  .file-drop.has-file{border-color:var(--verde-ok);color:var(--verde-ok);}
+  .file-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+  .voucher-preview{
+    margin-top:10px;
+    max-width:100%;
+    max-height:160px;
+    border-radius:8px;
+    border:1px solid var(--borde);
+    display:none;
+  }
+  .voucher-preview.show{display:block;}
+  .checkout-hint{font-size:.72rem;color:var(--gris-med);margin-top:8px;}
+  .confirm-box{
+    text-align:center;padding:30px 10px;
+  }
+  .confirm-box .ok-icon{font-size:2.6rem;margin-bottom:10px;}
+  .confirm-box h3{font-size:1.05rem;margin-bottom:6px;}
+  .confirm-box p{font-size:.85rem;color:var(--gris-med);margin-bottom:4px;}
+  .confirm-code{
+    display:inline-block;background:var(--gris-claro);padding:4px 10px;border-radius:6px;
+    font-weight:800;font-size:.85rem;margin-top:8px;
+  }
 
   footer{
     background:var(--gris-osc);
@@ -292,16 +379,95 @@
     font-weight:600;
   }
 
+  /* Panel del negocio (modal) */
+  .admin-modal{
+    position:fixed;
+    top:4%;left:50%;
+    transform:translate(-50%,-20px);
+    width:94%;
+    max-width:720px;
+    max-height:92vh;
+    background:#fff;
+    border-radius:12px;
+    z-index:100;
+    display:none;
+    flex-direction:column;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    opacity:0;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .admin-modal.open{display:flex;opacity:1;transform:translate(-50%,0);}
+  .admin-header{
+    padding:18px 22px;
+    border-bottom:1px solid var(--borde);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .admin-header h2{font-size:1.05rem;}
+  .admin-header p{font-size:.75rem;color:var(--gris-med);margin-top:2px;}
+  .admin-body{flex:1;overflow-y:auto;padding:18px 22px;}
+  .admin-empty{text-align:center;color:var(--gris-med);padding:40px 10px;font-size:.88rem;}
+  .order-card{
+    border:1px solid var(--borde);
+    border-radius:10px;
+    padding:14px;
+    margin-bottom:12px;
+  }
+  .order-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+  .order-code{font-weight:800;font-size:.85rem;}
+  .order-date{font-size:.72rem;color:var(--gris-med);}
+  .status-badge{
+    font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;
+  }
+  .status-pendiente{background:#fff3bf;color:#8a6d0a;}
+  .status-validado{background:#d3f9d8;color:#2b8a3e;}
+  .order-client{font-size:.82rem;margin-bottom:6px;}
+  .order-items{font-size:.78rem;color:var(--gris-med);margin-bottom:8px;line-height:1.5;}
+  .order-total{font-weight:800;font-size:.9rem;margin-bottom:10px;}
+  .order-voucher{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .order-voucher img{width:56px;height:56px;object-fit:cover;border-radius:6px;border:1px solid var(--borde);cursor:pointer;}
+  .order-actions{display:flex;gap:8px;flex-wrap:wrap;}
+  .btn-sm{
+    font-size:.78rem;font-weight:700;padding:8px 12px;border-radius:7px;border:none;cursor:pointer;
+  }
+  .btn-validate{background:var(--gris-osc);color:#fff;}
+  .btn-print{background:var(--verde-ok);color:#fff;}
+  .admin-footer{
+    padding:12px 22px 18px;border-top:1px solid var(--borde);
+    display:flex;justify-content:flex-end;
+  }
+  .btn-clear{background:none;border:none;color:#c92a2a;font-size:.75rem;cursor:pointer;}
+
+  /* Boleta imprimible (oculta en pantalla) */
+  #boletaPrint{display:none;}
+
+  @media print{
+    body *{visibility:hidden;}
+    #boletaPrint, #boletaPrint *{visibility:visible;}
+    #boletaPrint{
+      display:block;position:absolute;top:0;left:0;width:100%;padding:30px;
+    }
+    .boleta-head{text-align:center;margin-bottom:18px;}
+    .boleta-head h2{font-size:1.2rem;}
+    .boleta-head p{font-size:.8rem;color:#555;}
+    .boleta-meta{font-size:.85rem;margin-bottom:14px;}
+    .boleta-meta div{margin-bottom:3px;}
+    .boleta-table{width:100%;border-collapse:collapse;margin-bottom:14px;}
+    .boleta-table th, .boleta-table td{border-bottom:1px solid #ccc;padding:6px 4px;font-size:.82rem;text-align:left;}
+    .boleta-total{text-align:right;font-size:1rem;font-weight:800;margin-bottom:16px;}
+    .boleta-note{font-size:.72rem;color:#666;border-top:1px solid #ccc;padding-top:10px;}
+  }
+
   @media (max-width:480px){
     .hero h1{font-size:1.15rem;}
     .grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));}
     .card-img{height:90px;font-size:2rem;}
+    .admin-modal{top:2%;max-height:96vh;}
   }
 </style>
 </head>
 <body>
 
-<div class="demo-banner">DEMO — catálogo de ejemplo para presentación al cliente. Productos, precios y datos son ilustrativos.</div>
+<div class="demo-banner">DEMO — catálogo de ejemplo para presentación al cliente. Los pedidos, comprobantes y validaciones se guardan solo en este navegador (no hay servidor real detrás).</div>
 
 <header>
   <div class="header-top">
@@ -310,9 +476,12 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" id="searchInput" placeholder="Buscar productos... (ej: martillo, cable, pintura)">
     </div>
-    <button class="cart-btn" id="cartBtn">
-      🛒 Pedido <span class="cart-count" id="cartCount">0</span>
-    </button>
+    <div class="header-actions">
+      <button class="admin-btn" id="adminBtn">🔑 Panel del negocio (demo)</button>
+      <button class="cart-btn" id="cartBtn">
+        🛒 Pedido <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
   </div>
   <div class="cat-bar">
     <div class="cat-bar-inner" id="catBar"></div>
@@ -321,7 +490,7 @@
 
 <div class="hero">
   <h1>Todo para tu obra, en un solo lugar</h1>
-  <p>Arma tu pedido y confírmalo directo por WhatsApp — sin registro, sin complicaciones.</p>
+  <p>Arma tu pedido, sube tu comprobante de pago y coordina la entrega — sin registro, sin complicaciones.</p>
 </div>
 
 <main>
@@ -338,24 +507,94 @@
 </footer>
 
 <div class="overlay" id="overlay"></div>
+
+<!-- Drawer del carrito -->
 <div class="drawer" id="drawer">
   <div class="drawer-header">
-    <h2>Tu pedido</h2>
+    <h2 id="drawerTitle">Tu pedido</h2>
     <button class="drawer-close" id="drawerClose">✕</button>
   </div>
+
   <div class="drawer-items" id="drawerItems"></div>
-  <div class="drawer-footer">
+  <div class="drawer-footer" id="drawerFooter">
     <div class="drawer-total"><span>Total</span><span id="drawerTotal">S/ 0.00</span></div>
-    <button class="wa-btn" id="waBtn" disabled>
-      <span>📲</span> Confirmar pedido por WhatsApp
+    <button class="primary-btn" id="goCheckoutBtn" disabled>
+      <span>📎</span> Enviar pedido con comprobante de pago
     </button>
-    <p class="wa-hint">Se abrirá WhatsApp con el resumen de tu pedido listo para enviar.</p>
+    <button class="wa-btn" id="waBtn" disabled>
+      <span>📲</span> O coordinar directo por WhatsApp
+    </button>
+    <p class="wa-hint">Puedes pagar por Yape/Plin y subir tu comprobante, o coordinar todo por WhatsApp.</p>
+  </div>
+
+  <!-- Paso de checkout con voucher -->
+  <div class="checkout-step" id="checkoutStep">
+    <button class="checkout-back" id="checkoutBack">← Volver al pedido</button>
+
+    <div class="pago-info">
+      <strong>Datos para pagar</strong>
+      <div class="pago-linea"><span>Yape / Plin</span><b>999 999 999</b></div>
+      <div class="pago-linea"><span>Titular</span><b>Ferretería El Constructor</b></div>
+      <div class="pago-linea"><span>Total a pagar</span><b id="checkoutTotal">S/ 0.00</b></div>
+    </div>
+
+    <div class="form-field">
+      <label for="clienteNombre">Nombre completo</label>
+      <input type="text" id="clienteNombre" placeholder="Ej: Juan Pérez">
+    </div>
+    <div class="form-field">
+      <label for="clienteCelular">Celular de contacto</label>
+      <input type="tel" id="clienteCelular" placeholder="Ej: 987 654 321">
+    </div>
+    <div class="form-field">
+      <label>Comprobante de pago (foto de Yape/Plin/transferencia)</label>
+      <div class="file-drop" id="fileDrop">
+        <span id="fileDropText">Toca para subir la foto del comprobante</span>
+        <input type="file" id="voucherInput" accept="image/*">
+      </div>
+      <img id="voucherPreview" class="voucher-preview" alt="Vista previa del comprobante">
+    </div>
+
+    <button class="primary-btn" id="submitPedidoBtn" disabled>Enviar pedido para validación</button>
+    <p class="checkout-hint">El negocio revisará tu comprobante y confirmará tu pedido. Esta demo simula ese proceso guardando todo en tu navegador.</p>
+  </div>
+
+  <!-- Confirmación -->
+  <div class="checkout-step" id="confirmStep">
+    <div class="confirm-box">
+      <div class="ok-icon">✅</div>
+      <h3>¡Pedido enviado!</h3>
+      <p>Tu comprobante quedó registrado para revisión.</p>
+      <p>Te contactaremos apenas se valide el pago.</p>
+      <span class="confirm-code" id="confirmCode"></span>
+    </div>
+    <button class="primary-btn" id="closeConfirmBtn">Volver al catálogo</button>
   </div>
 </div>
+
+<!-- Panel del negocio -->
+<div class="admin-modal" id="adminModal">
+  <div class="admin-header">
+    <div>
+      <h2>Panel del negocio (demo)</h2>
+      <p>Aquí el negocio revisa comprobantes, los valida y genera la boleta.</p>
+    </div>
+    <button class="drawer-close" id="adminClose">✕</button>
+  </div>
+  <div class="admin-body" id="adminBody"></div>
+  <div class="admin-footer">
+    <button class="btn-clear" id="clearOrdersBtn">Vaciar pedidos de prueba</button>
+  </div>
+</div>
+
+<!-- Boleta imprimible -->
+<div id="boletaPrint"></div>
 
 <script>
 // ---------- Datos de ejemplo (catálogo demo) ----------
 const WHATSAPP_NUMBER = "51999999999"; // reemplazar por el número real del cliente
+const NEGOCIO_NOMBRE = "Ferretería El Constructor";
+const PAGO_YAPE_PLIN = "999 999 999";
 
 const PRODUCTS = [
   {id:1, name:"Martillo de uña 16oz mango fibra", cat:"Herramientas Manuales", price:32.90, unit:"unidad", icon:"🔨"},
@@ -406,6 +645,8 @@ const CATEGORIES = ["Todos", ...Array.from(new Set(PRODUCTS.map(p => p.cat)))];
 let activeCategory = "Todos";
 let searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("ferreteria_cart_demo") || "{}");
+let pedidos = JSON.parse(localStorage.getItem("ferreteria_pedidos_demo") || "[]");
+let voucherDataUrl = null;
 
 // ---------- Render categorías ----------
 const catBar = document.getElementById("catBar");
@@ -483,6 +724,9 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
 function saveCart(){
   localStorage.setItem("ferreteria_cart_demo", JSON.stringify(cart));
 }
+function savePedidos(){
+  localStorage.setItem("ferreteria_pedidos_demo", JSON.stringify(pedidos));
+}
 
 function addToCart(id){
   cart[id] = (cart[id] || 0) + 1;
@@ -547,27 +791,43 @@ function updateCartUI(){
 
   const total = cartTotal();
   document.getElementById("drawerTotal").textContent = money(total);
+  document.getElementById("goCheckoutBtn").disabled = entries.length === 0;
   document.getElementById("waBtn").disabled = entries.length === 0;
 }
 
 // ---------- Drawer open/close ----------
 const drawer = document.getElementById("drawer");
 const overlay = document.getElementById("overlay");
+const drawerItems = document.getElementById("drawerItems");
+const drawerFooter = document.getElementById("drawerFooter");
+const checkoutStep = document.getElementById("checkoutStep");
+const confirmStep = document.getElementById("confirmStep");
+const drawerTitle = document.getElementById("drawerTitle");
+
+function showCartView(){
+  drawerItems.style.display = "block";
+  drawerFooter.style.display = "block";
+  checkoutStep.classList.remove("open");
+  confirmStep.classList.remove("open");
+  drawerTitle.textContent = "Tu pedido";
+}
 
 function openDrawer(){
+  showCartView();
   drawer.classList.add("open");
   overlay.classList.add("open");
 }
 function closeDrawer(){
   drawer.classList.remove("open");
   overlay.classList.remove("open");
+  closeAdmin();
 }
 
 document.getElementById("cartBtn").addEventListener("click", openDrawer);
 document.getElementById("drawerClose").addEventListener("click", closeDrawer);
-overlay.addEventListener("click", closeDrawer);
+overlay.addEventListener("click", () => { closeDrawer(); });
 
-// ---------- Enviar por WhatsApp ----------
+// ---------- Enviar por WhatsApp (alternativa) ----------
 document.getElementById("waBtn").addEventListener("click", () => {
   const entries = Object.entries(cart);
   if (!entries.length) return;
@@ -581,6 +841,206 @@ document.getElementById("waBtn").addEventListener("click", () => {
 
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   window.open(url, "_blank");
+});
+
+// ---------- Paso de checkout con voucher ----------
+const goCheckoutBtn = document.getElementById("goCheckoutBtn");
+const checkoutBack = document.getElementById("checkoutBack");
+const checkoutTotal = document.getElementById("checkoutTotal");
+const clienteNombre = document.getElementById("clienteNombre");
+const clienteCelular = document.getElementById("clienteCelular");
+const fileDrop = document.getElementById("fileDrop");
+const fileDropText = document.getElementById("fileDropText");
+const voucherInput = document.getElementById("voucherInput");
+const voucherPreview = document.getElementById("voucherPreview");
+const submitPedidoBtn = document.getElementById("submitPedidoBtn");
+const confirmCode = document.getElementById("confirmCode");
+
+goCheckoutBtn.addEventListener("click", () => {
+  if (!Object.keys(cart).length) return;
+  drawerItems.style.display = "none";
+  drawerFooter.style.display = "none";
+  checkoutStep.classList.add("open");
+  drawerTitle.textContent = "Confirmar y pagar";
+  checkoutTotal.textContent = money(cartTotal());
+});
+
+checkoutBack.addEventListener("click", () => {
+  checkoutStep.classList.remove("open");
+  drawerItems.style.display = "block";
+  drawerFooter.style.display = "block";
+  drawerTitle.textContent = "Tu pedido";
+});
+
+function validateCheckoutForm(){
+  submitPedidoBtn.disabled = !(clienteNombre.value.trim() && clienteCelular.value.trim() && voucherDataUrl);
+}
+clienteNombre.addEventListener("input", validateCheckoutForm);
+clienteCelular.addEventListener("input", validateCheckoutForm);
+
+voucherInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    voucherDataUrl = reader.result;
+    voucherPreview.src = voucherDataUrl;
+    voucherPreview.classList.add("show");
+    fileDrop.classList.add("has-file");
+    fileDropText.textContent = "✓ " + file.name;
+    validateCheckoutForm();
+  };
+  reader.readAsDataURL(file);
+});
+
+submitPedidoBtn.addEventListener("click", () => {
+  const entries = Object.entries(cart);
+  if (!entries.length || !voucherDataUrl) return;
+
+  const items = entries.map(([id, qty]) => {
+    const p = PRODUCTS.find(x => x.id === Number(id));
+    return { name: p.name, qty, price: p.price, unit: p.unit };
+  });
+
+  const pedido = {
+    id: Date.now(),
+    codigo: "PED-" + String(Date.now()).slice(-6),
+    fecha: new Date().toLocaleString("es-PE"),
+    cliente: clienteNombre.value.trim(),
+    celular: clienteCelular.value.trim(),
+    items,
+    total: cartTotal(),
+    voucher: voucherDataUrl,
+    estado: "pendiente",
+  };
+  pedidos.unshift(pedido);
+  savePedidos();
+
+  // reset carrito y formulario
+  cart = {};
+  saveCart();
+  updateCartUI();
+  clienteNombre.value = "";
+  clienteCelular.value = "";
+  voucherDataUrl = null;
+  voucherPreview.classList.remove("show");
+  fileDrop.classList.remove("has-file");
+  fileDropText.textContent = "Toca para subir la foto del comprobante";
+  submitPedidoBtn.disabled = true;
+
+  // mostrar confirmación
+  checkoutStep.classList.remove("open");
+  confirmStep.classList.add("open");
+  drawerTitle.textContent = "Pedido enviado";
+  confirmCode.textContent = pedido.codigo;
+});
+
+document.getElementById("closeConfirmBtn").addEventListener("click", () => {
+  closeDrawer();
+});
+
+// ---------- Panel del negocio ----------
+const adminModal = document.getElementById("adminModal");
+const adminBody = document.getElementById("adminBody");
+
+function openAdmin(){
+  renderAdminOrders();
+  adminModal.classList.add("open");
+  overlay.classList.add("open");
+}
+function closeAdmin(){
+  adminModal.classList.remove("open");
+  if (!drawer.classList.contains("open")) overlay.classList.remove("open");
+}
+
+document.getElementById("adminBtn").addEventListener("click", openAdmin);
+document.getElementById("adminClose").addEventListener("click", closeAdmin);
+overlay.addEventListener("click", () => { closeAdmin(); });
+
+function renderAdminOrders(){
+  if (!pedidos.length){
+    adminBody.innerHTML = `<div class="admin-empty">Todavía no hay pedidos de prueba.<br>Arma un pedido y súbelo con comprobante para verlo aquí.</div>`;
+    return;
+  }
+
+  adminBody.innerHTML = pedidos.map(p => {
+    const itemsResumen = p.items.map(it => `${it.qty}x ${it.name}`).join(" · ");
+    const badge = p.estado === "validado"
+      ? `<span class="status-badge status-validado">✓ Validado</span>`
+      : `<span class="status-badge status-pendiente">Pendiente</span>`;
+    const actions = p.estado === "validado"
+      ? `<button class="btn-sm btn-print" onclick="imprimirBoleta(${p.id})">🖨️ Imprimir boleta</button>`
+      : `<button class="btn-sm btn-validate" onclick="validarPedido(${p.id})">✓ Validar comprobante</button>`;
+
+    return `
+      <div class="order-card">
+        <div class="order-top">
+          <div>
+            <div class="order-code">${p.codigo}</div>
+            <div class="order-date">${p.fecha}</div>
+          </div>
+          ${badge}
+        </div>
+        <div class="order-client"><strong>${p.cliente}</strong> · ${p.celular}</div>
+        <div class="order-items">${itemsResumen}</div>
+        <div class="order-total">Total: ${money(p.total)}</div>
+        <div class="order-voucher">
+          <a href="${p.voucher}" target="_blank" rel="noopener"><img src="${p.voucher}" alt="Comprobante"></a>
+          <span class="checkout-hint">Comprobante adjunto — toca para ampliar</span>
+        </div>
+        <div class="order-actions">${actions}</div>
+      </div>
+    `;
+  }).join("");
+}
+
+function validarPedido(id){
+  const p = pedidos.find(x => x.id === id);
+  if (!p) return;
+  p.estado = "validado";
+  savePedidos();
+  renderAdminOrders();
+}
+
+function imprimirBoleta(id){
+  const p = pedidos.find(x => x.id === id);
+  if (!p) return;
+
+  const filas = p.items.map(it => `
+    <tr>
+      <td>${it.name}</td>
+      <td>${it.qty} ${it.unit}</td>
+      <td>${money(it.price)}</td>
+      <td>${money(it.price * it.qty)}</td>
+    </tr>
+  `).join("");
+
+  document.getElementById("boletaPrint").innerHTML = `
+    <div class="boleta-head">
+      <h2>${NEGOCIO_NOMBRE}</h2>
+      <p>Comprobante de pedido — ${p.codigo}</p>
+    </div>
+    <div class="boleta-meta">
+      <div><b>Fecha:</b> ${p.fecha}</div>
+      <div><b>Cliente:</b> ${p.cliente}</div>
+      <div><b>Celular:</b> ${p.celular}</div>
+      <div><b>Estado del pago:</b> Comprobante validado por el negocio</div>
+    </div>
+    <table class="boleta-table">
+      <thead><tr><th>Producto</th><th>Cant.</th><th>P. Unit.</th><th>Subtotal</th></tr></thead>
+      <tbody>${filas}</tbody>
+    </table>
+    <div class="boleta-total">Total: ${money(p.total)}</div>
+    <div class="boleta-note">Este documento es un comprobante interno de pedido y no constituye una boleta electrónica emitida ante SUNAT. Documento generado en demo — Ferretería El Constructor.</div>
+  `;
+  window.print();
+}
+
+document.getElementById("clearOrdersBtn").addEventListener("click", () => {
+  if (!confirm("¿Vaciar todos los pedidos de prueba de esta demo?")) return;
+  pedidos = [];
+  savePedidos();
+  renderAdminOrders();
 });
 
 // ---------- Init ----------
