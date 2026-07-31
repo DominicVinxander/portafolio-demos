@@ -21,6 +21,10 @@ const PATIENTS = [
       { tipo: "Radiografía periapical", fecha: "2026-06-18", pieza: "Pieza 36" },
       { tipo: "Foto intraoral", fecha: "2026-04-02", pieza: "Cuadrante inferior izquierdo" },
     ],
+    odontograma: {
+      36: { condicion: "endodoncia", nota: "Endodoncia en curso, 2da sesión" },
+      17: { condicion: "obturacion", nota: "Resina O, buen estado" },
+    },
   },
   {
     id: "p2",
@@ -40,6 +44,10 @@ const PATIENTS = [
     archivos: [
       { tipo: "Radiografía panorámica", fecha: "2026-07-08", pieza: "Vista completa" },
     ],
+    odontograma: {
+      18: { condicion: "extraccion", nota: "Extraído — tercer molar semi-incluido" },
+      47: { condicion: "caries", nota: "Caries O, pendiente evaluar" },
+    },
   },
   {
     id: "p3",
@@ -59,6 +67,10 @@ const PATIENTS = [
     archivos: [
       { tipo: "Foto intraoral", fecha: "2026-01-14", pieza: "Pieza 21" },
     ],
+    odontograma: {
+      21: { condicion: "obturacion", nota: "Resina interproximal" },
+      36: { condicion: "preventivo", nota: "Sellante aplicado" },
+    },
   },
   {
     id: "p4",
@@ -79,6 +91,10 @@ const PATIENTS = [
       { tipo: "Radiografía panorámica", fecha: "2026-05-20", pieza: "Vista completa" },
       { tipo: "Foto intraoral", fecha: "2026-07-05", pieza: "Encía inferior" },
     ],
+    odontograma: {
+      46: { condicion: "preventivo", nota: "Control periodontal, bolsa 4mm" },
+      37: { condicion: "preventivo", nota: "Control periodontal, bolsa 5mm" },
+    },
   },
   {
     id: "p5",
@@ -116,6 +132,11 @@ const PATIENTS = [
     archivos: [
       { tipo: "Radiografía panorámica", fecha: "2026-06-12", pieza: "Vista completa" },
     ],
+    odontograma: {
+      36: { condicion: "extraccion", nota: "Ausente — pilar de prótesis parcial" },
+      46: { condicion: "extraccion", nota: "Ausente — pilar de prótesis parcial" },
+      26: { condicion: "implante", nota: "Implante 2023, oseointegrado" },
+    },
   },
   {
     id: "p7",
@@ -132,6 +153,10 @@ const PATIENTS = [
       { fecha: "2026-07-30", tipo: "Consulta general", nota: "Primera consulta. Evaluación general, se realiza odontograma completo. Sin urgencias." },
     ],
     archivos: [],
+    odontograma: {
+      14: { condicion: "caries", nota: "Caries O incipiente, observar" },
+      26: { condicion: "caries", nota: "Caries O, requiere resina" },
+    },
   },
   {
     id: "p8",

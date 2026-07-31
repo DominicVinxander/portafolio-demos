@@ -113,7 +113,11 @@ function renderView(view){
       pendingHighlightId = null;
     }
   }
-  else if(view === "patient-detail") root.innerHTML = patientDetailHTML(currentPatientId);
+  else if(view === "patient-detail"){
+    root.innerHTML = patientDetailHTML(currentPatientId);
+    const p = PATIENTS.find(x => x.id === currentPatientId);
+    if(p) bindOdontogramaEvents(p);
+  }
   else if(view === "settings") root.innerHTML = settingsHTML();
   bindDynamicEvents();
 }
@@ -122,6 +126,7 @@ function bindDynamicEvents(){
   $$("[data-open-patient]").forEach(row => {
     row.addEventListener("click", () => {
       currentPatientId = row.dataset.openPatient;
+      if(typeof odontoSelectedTooth !== "undefined") odontoSelectedTooth = null;
       renderView("patient-detail");
     });
   });
@@ -329,6 +334,8 @@ function patientDetailHTML(id){
       </div>
 
       <div style="display:flex; flex-direction:column; gap:20px;">
+        ${odontogramaPanelHTML(p)}
+
         <div class="panel">
           <div class="panel-head"><h3>Historial de tratamientos</h3><span class="tag muted">${p.consultas.length} consultas</span></div>
           <div class="timeline">${timeline}</div>
